@@ -1,4 +1,4 @@
-package com.pgf.politicalgovernanceframeworkbackend.model;
+package com.pgf.politicalgovernanceframeworkbackend.contract;
 
 import io.reactivex.Flowable;
 import java.math.BigInteger;

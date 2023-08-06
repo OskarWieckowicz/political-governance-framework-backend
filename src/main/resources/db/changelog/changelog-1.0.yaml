@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-payment-received-event-table
+      author: owieckowicz
+      changes:
+        - createTable:
+            tableName: payment_received_event
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: tax_identifier
+                  type: VARCHAR(255)
+              - column:
+                  name: amount
+                  type: BIGINT
+              - column:
+                  name: transaction_hash
+                  type: VARCHAR(255)
+              - column:
+                  name: timestamp
+                  type: BIGINT
+              - column:
+                  name: block_number
+                  type: BIGINT

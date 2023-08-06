@@ -19,7 +19,6 @@ class TaxOfficeController {
 
     @GetMapping("/logs")
     ResponseEntity<Void> getLogs() throws IOException {
-        web3Service.getPaymentReceivedLogs();
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
