@@ -23,7 +23,7 @@ public class LogsReaderScheduler {
     private final Web3Service web3Service;
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
 
-    @Scheduled(fixedRate = 20000)
+//    @Scheduled(fixedRate = 20000)
     public void task() {
         log.info("Scheduled Task executed!");
         Optional<PaymentReceivedEvent> latestPaymentReceivedEvent = paymentReceivedEventRepository.findTopByOrderByIdDesc();
