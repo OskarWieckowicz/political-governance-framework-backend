@@ -1,4 +1,12 @@
+server:
+  port: 8081
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/political-governance
+          jwk-set-uri: http://localhost:8080/realms/political-governance/protocol/openid-connect/certs
   datasource:
     url: jdbc:postgresql://localhost:5432/pgf
     username: postgres
@@ -12,6 +20,9 @@ spring:
 infura-endpoint:
 private-key:
 
-## Liquibase change log location
-#liquibase:
-#  change-log: classpath:/db/changelog/db.changelog-master.yaml
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+

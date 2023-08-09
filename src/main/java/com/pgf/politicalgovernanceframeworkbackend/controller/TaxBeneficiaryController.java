@@ -1,7 +1,9 @@
 package com.pgf.politicalgovernanceframeworkbackend.controller;
 
+import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDto;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,5 +53,19 @@ class TaxBeneficiaryController {
 
         // Creating a Flux of TaxBeneficiaryDto
         return List.of(beneficiary1, beneficiary2, beneficiary3, beneficiary4, beneficiary5);
+    }
+
+    @GetMapping("/details/{name}")
+    TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@PathVariable String name) {
+        return TaxBeneficiaryDetailsDto.builder()
+                .image("/eu.img")
+                .name("European Union")
+                .description("The main and central goal of EU development cooperation is the eradication of poverty...")
+                .site("https://european-union.europa.eu/")
+                .leader("Ursula von der Leyen")
+                .smartContractAddress("0x06f333ca1c1b3d08f487d67a5a377cb92d3695ba85d4cc30855733d6a160caba")
+                .balance(124414.1151)
+                .citizensSatisfaction(2.98)
+                .build();
     }
 }
