@@ -5,10 +5,10 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/political-governance
-          jwk-set-uri: http://localhost:8080/realms/political-governance/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8082/realms/political-governance
+          jwk-set-uri: http://localhost:8082/realms/political-governance/protocol/openid-connect/certs
   datasource:
-    url: jdbc:postgresql://localhost:5432/pgf
+    url: jdbc:postgresql://localhost:5433/pgf
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
