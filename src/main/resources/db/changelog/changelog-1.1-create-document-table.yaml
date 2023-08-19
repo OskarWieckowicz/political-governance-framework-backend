@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: createDocumentTable
+      author: owieckowicz
+      changes:
+        - createTable:
+            tableName: document
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: date
+                  type: VARCHAR(255)
+              - column:
+                  name: amount
+                  type: FLOAT
+              - column:
+                  name: type
+                  type: VARCHAR(255)
+              - column:
+                  name: file
+                  type: VARCHAR(255)
