@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/changelog-1.0.yaml
   - include:
       file: db/changelog/changelog-1.1-create-document-table.yaml
+  - include:
+      file: db/changelog/changelog-1.2-create-declaration-table.yaml

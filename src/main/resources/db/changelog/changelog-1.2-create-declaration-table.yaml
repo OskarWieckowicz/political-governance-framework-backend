@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-declaration-table
+      author: owieckowicz
+      changes:
+        - createTable:
+            tableName: Declaration
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: billingPeriod
+                  type: varchar(255)
+              - column:
+                  name: revenue
+                  type: float
+              - column:
+                  name: expense
+                  type: float
+              - column:
+                  name: income
+                  type: float
+              - column:
+                  name: taxes
+                  type: float
