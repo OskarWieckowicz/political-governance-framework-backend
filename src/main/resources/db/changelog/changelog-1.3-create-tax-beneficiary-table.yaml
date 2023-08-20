@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTaxBeneficiaryTable
+      author: owieckowicz
+      changes:
+        - createTable:
+            tableName: tax_beneficiary
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(1000)
+              - column:
+                  name: img
+                  type: VARCHAR(255)
+              - column:
+                  name: rating
+                  type: FLOAT
