@@ -15,7 +15,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update # You can change this to create if you want to initialize the schema
+      ddl-auto: none # You can change this to create if you want to initialize the schema
     show-sql: true # Set this to true to see SQL queries in the console
 infura-endpoint:
 private-key:

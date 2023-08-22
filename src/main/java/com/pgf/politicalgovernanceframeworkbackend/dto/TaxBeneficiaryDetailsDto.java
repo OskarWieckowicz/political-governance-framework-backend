@@ -1,5 +1,6 @@
 package com.pgf.politicalgovernanceframeworkbackend.dto;
 
+import java.math.BigInteger;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,6 +13,6 @@ public class TaxBeneficiaryDetailsDto {
     private String site;
     private String leader;
     private String smartContractAddress;
-    private double balance;
-    private double citizensSatisfaction;
+    private BigInteger balance;
+    private float citizensSatisfaction;
 }

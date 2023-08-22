@@ -4,7 +4,7 @@ databaseChangeLog:
       author: owieckowicz
       changes:
         - createTable:
-            tableName: Declaration
+            tableName: declaration
             columns:
               - column:
                   name: id
@@ -12,7 +12,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
-                  name: billingPeriod
+                  name: billing_period
                   type: varchar(255)
               - column:
                   name: revenue
