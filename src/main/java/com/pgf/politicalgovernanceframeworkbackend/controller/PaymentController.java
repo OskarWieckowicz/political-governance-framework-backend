@@ -1,6 +1,7 @@
 package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.PaymentDto;
+import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,7 @@ import reactor.core.publisher.Flux;
 class PaymentController {
 
     @GetMapping
-    Flux<PaymentDto> getPayments() {
+    List<PaymentDto> getPayments() {
         PaymentDto paymentDto1 = PaymentDto.builder()
                 .percentage(20)
                 .destination("Education")
@@ -26,6 +27,6 @@ class PaymentController {
                 .value(120f)
                 .paid(40f)
                 .build();
-        return Flux.just(paymentDto1, paymentDto2);
+        return List.of(paymentDto1, paymentDto2);
     }
 }

@@ -11,7 +11,52 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
+    networks:
+      - web
+
+  postgres-keycloak:
+    image: postgres:latest
+    container_name: postgres-keycloak
+    volumes:
+      - pgdata-keycloak:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+    networks:
+      - web
+
+  keycloak:
+    image:  quay.io/keycloak/keycloak:latest
+    command: -v start-dev --import-realm
+#    command: start-dev
+    container_name: keycloak
+    volumes:
+      - ./src/main/resources/keycloak:/opt/keycloak/data/import
+    ports:
+      - "8082:8080"
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres-keycloak
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_SCHEMA: public
+      KC_DB_PASSWORD: password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    depends_on:
+      postgres-keycloak:
+        condition: service_started
+    networks:
+      - web
 
 volumes:
   postgres_data:
     driver: local
+  pgdata-keycloak:
+    driver: local
+
+networks:
+  web:
