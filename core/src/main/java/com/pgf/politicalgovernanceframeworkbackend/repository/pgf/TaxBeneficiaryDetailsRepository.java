@@ -1,6 +1,6 @@
-package com.pgf.politicalgovernanceframeworkbackend.repository;
+package com.pgf.politicalgovernanceframeworkbackend.repository.pgf;
 
-import com.pgf.politicalgovernanceframeworkbackend.entity.TaxBeneficiaryDetails;
+import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxBeneficiaryDetails;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;

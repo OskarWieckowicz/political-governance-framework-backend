@@ -51,6 +51,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="${properties.kcLabelWrapperClass!}">
+                    <label for="user.attributes.city" class="${properties.kcLabelClass!}">City</label>
+                </div>
+
+                <div class="${properties.kcInputWrapperClass!}">
+                    <input type="text" class="${properties.kcInputClass!}" id="user.attributes.city" name="user.attributes.city" value="${(register.formData['user.attributes.city']!'')}"/>
+                </div>
+            </div>
+
             <div class="${properties.kcFormGroupClass!}">
                 <div class="${properties.kcLabelWrapperClass!}">
                     <label for="email" class="${properties.kcLabelClass!}">${msg("email")}</label>

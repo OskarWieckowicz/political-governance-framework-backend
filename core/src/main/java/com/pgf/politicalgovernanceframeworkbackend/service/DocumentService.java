@@ -2,8 +2,8 @@ package com.pgf.politicalgovernanceframeworkbackend.service;
 
 import com.pgf.politicalgovernanceframeworkbackend.converter.DocumentConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.DocumentDto;
-import com.pgf.politicalgovernanceframeworkbackend.entity.Document;
-import com.pgf.politicalgovernanceframeworkbackend.repository.DocumentRepository;
+import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.Document;
+import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.DocumentRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

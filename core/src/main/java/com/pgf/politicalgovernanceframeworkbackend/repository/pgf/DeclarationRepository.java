@@ -1,6 +1,6 @@
-package com.pgf.politicalgovernanceframeworkbackend.repository;
+package com.pgf.politicalgovernanceframeworkbackend.repository.pgf;
 
-import com.pgf.politicalgovernanceframeworkbackend.entity.Declaration;
+import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.Declaration;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;

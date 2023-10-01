@@ -1,4 +1,4 @@
-package com.pgf.politicalgovernanceframeworkbackend.entity;
+package com.pgf.politicalgovernanceframeworkbackend.entity.pgf;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

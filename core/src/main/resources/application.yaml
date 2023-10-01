@@ -8,7 +8,7 @@ spring:
           issuer-uri: http://localhost:8082/realms/political-governance
           jwk-set-uri: http://localhost:8082/realms/political-governance/protocol/openid-connect/certs
   datasource:
-    url: jdbc:postgresql://localhost:5433/pgf
+    jdbcUrl: jdbc:postgresql://localhost:5433/pgf
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -17,6 +17,12 @@ spring:
     hibernate:
       ddl-auto: none # You can change this to create if you want to initialize the schema
     show-sql: true # Set this to true to see SQL queries in the console
+  second-datasource:
+    jdbcUrl: jdbc:postgresql://localhost:5434/keycloak
+    username: keycloak
+    password: password
+    driver-class-name: org.postgresql.Driver
+
 infura-endpoint:
 private-key:
 

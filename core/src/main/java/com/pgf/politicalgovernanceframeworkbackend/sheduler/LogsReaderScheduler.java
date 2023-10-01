@@ -1,12 +1,11 @@
 package com.pgf.politicalgovernanceframeworkbackend.sheduler;
 
-import com.pgf.politicalgovernanceframeworkbackend.entity.PaymentReceivedEvent;
-import com.pgf.politicalgovernanceframeworkbackend.repository.PaymentReceivedEventRepository;
+import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.PaymentReceivedEvent;
+import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.PaymentReceivedEventRepository;
 import com.pgf.politicalgovernanceframeworkbackend.service.Web3Service;
 import io.reactivex.disposables.Disposable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;

@@ -2,9 +2,9 @@ package com.pgf.politicalgovernanceframeworkbackend.service;
 
 import com.pgf.politicalgovernanceframeworkbackend.converter.TaxBeneficiaryDetailsConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
-import com.pgf.politicalgovernanceframeworkbackend.entity.TaxBeneficiaryDetails;
+import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxBeneficiaryDetails;
 import com.pgf.politicalgovernanceframeworkbackend.exception.NotFoundException;
-import com.pgf.politicalgovernanceframeworkbackend.repository.TaxBeneficiaryDetailsRepository;
+import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.TaxBeneficiaryDetailsRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

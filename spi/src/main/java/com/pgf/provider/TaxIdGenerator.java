@@ -1,30 +1,28 @@
 package com.pgf.provider;
 
-import jakarta.ws.rs.core.Response;
-import org.keycloak.authentication.AuthenticationFlowContext;
-import org.keycloak.authentication.Authenticator;
+import org.keycloak.authentication.FormAction;
+import org.keycloak.authentication.FormContext;
+import org.keycloak.authentication.ValidationContext;
+import org.keycloak.forms.login.LoginFormsProvider;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 
-
-public class CustomAuthenticator implements Authenticator {
-
-    public static final String REGISTRATION_FORM = "register.ftl";
-
+public class TaxIdGenerator implements FormAction {
     @Override
-    public void authenticate(AuthenticationFlowContext context) {
-//        Response challenge = context.form()
-//            .createForm(REGISTRATION_FORM);
-//        context.challenge(challenge);
-        context.success();
+    public void buildPage(FormContext formContext, LoginFormsProvider loginFormsProvider) {
+
     }
 
     @Override
-    public void action(AuthenticationFlowContext context) {
+    public void validate(ValidationContext validationContext) {
+        validationContext.success();
+    }
+
+    @Override
+    public void success(FormContext context) {
         UserModel user = context.getUser();
-        user.setSingleAttribute("taxId", "xd123");
-        context.success();
+        user.setSingleAttribute("taxId", "xd");
     }
 
     @Override
@@ -47,4 +45,3 @@ public class CustomAuthenticator implements Authenticator {
 
     }
 }
-

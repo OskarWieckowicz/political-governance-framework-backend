@@ -1,7 +1,7 @@
 package com.pgf.politicalgovernanceframeworkbackend.converter;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
-import com.pgf.politicalgovernanceframeworkbackend.entity.TaxBeneficiaryDetails;
+import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxBeneficiaryDetails;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
