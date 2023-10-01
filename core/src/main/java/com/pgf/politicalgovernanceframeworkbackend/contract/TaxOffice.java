@@ -73,9 +73,9 @@ public class TaxOffice extends Contract {
     }
 
     public static List<PaymentReceivedEventResponse> getPaymentReceivedEvents(TransactionReceipt transactionReceipt) {
-        List<Contract.EventValuesWithLog> valueList = staticExtractEventParametersWithLog(PAYMENTRECEIVED_EVENT, transactionReceipt);
+        List<EventValuesWithLog> valueList = staticExtractEventParametersWithLog(PAYMENTRECEIVED_EVENT, transactionReceipt);
         ArrayList<PaymentReceivedEventResponse> responses = new ArrayList<PaymentReceivedEventResponse>(valueList.size());
-        for (Contract.EventValuesWithLog eventValues : valueList) {
+        for (EventValuesWithLog eventValues : valueList) {
             PaymentReceivedEventResponse typedResponse = new PaymentReceivedEventResponse();
             typedResponse.log = eventValues.getLog();
             typedResponse.taxIdentifier = (String) eventValues.getNonIndexedValues().get(0).getValue();
@@ -86,7 +86,7 @@ public class TaxOffice extends Contract {
     }
 
     public static PaymentReceivedEventResponse getPaymentReceivedEventFromLog(Log log) {
-        Contract.EventValuesWithLog eventValues = staticExtractEventParametersWithLog(PAYMENTRECEIVED_EVENT, log);
+        EventValuesWithLog eventValues = staticExtractEventParametersWithLog(PAYMENTRECEIVED_EVENT, log);
         PaymentReceivedEventResponse typedResponse = new PaymentReceivedEventResponse();
         typedResponse.log = log;
         typedResponse.taxIdentifier = (String) eventValues.getNonIndexedValues().get(0).getValue();
@@ -105,9 +105,9 @@ public class TaxOffice extends Contract {
     }
 
     public static List<PaymentWithdrawnEventResponse> getPaymentWithdrawnEvents(TransactionReceipt transactionReceipt) {
-        List<Contract.EventValuesWithLog> valueList = staticExtractEventParametersWithLog(PAYMENTWITHDRAWN_EVENT, transactionReceipt);
+        List<EventValuesWithLog> valueList = staticExtractEventParametersWithLog(PAYMENTWITHDRAWN_EVENT, transactionReceipt);
         ArrayList<PaymentWithdrawnEventResponse> responses = new ArrayList<PaymentWithdrawnEventResponse>(valueList.size());
-        for (Contract.EventValuesWithLog eventValues : valueList) {
+        for (EventValuesWithLog eventValues : valueList) {
             PaymentWithdrawnEventResponse typedResponse = new PaymentWithdrawnEventResponse();
             typedResponse.log = eventValues.getLog();
             typedResponse.receiver = (String) eventValues.getNonIndexedValues().get(0).getValue();
@@ -118,7 +118,7 @@ public class TaxOffice extends Contract {
     }
 
     public static PaymentWithdrawnEventResponse getPaymentWithdrawnEventFromLog(Log log) {
-        Contract.EventValuesWithLog eventValues = staticExtractEventParametersWithLog(PAYMENTWITHDRAWN_EVENT, log);
+        EventValuesWithLog eventValues = staticExtractEventParametersWithLog(PAYMENTWITHDRAWN_EVENT, log);
         PaymentWithdrawnEventResponse typedResponse = new PaymentWithdrawnEventResponse();
         typedResponse.log = log;
         typedResponse.receiver = (String) eventValues.getNonIndexedValues().get(0).getValue();
@@ -146,7 +146,7 @@ public class TaxOffice extends Contract {
     public RemoteFunctionCall<TransactionReceipt> pay(String taxIdentifier, BigInteger weiValue) {
         final Function function = new Function(
                 FUNC_PAY, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Utf8String(taxIdentifier)), 
+                Arrays.<Type>asList(new Utf8String(taxIdentifier)),
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function, weiValue);
     }
@@ -154,7 +154,7 @@ public class TaxOffice extends Contract {
     public RemoteFunctionCall<TransactionReceipt> withdraw(BigInteger amount) {
         final Function function = new Function(
                 FUNC_WITHDRAW, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(amount)), 
+                Arrays.<Type>asList(new Uint256(amount)),
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }

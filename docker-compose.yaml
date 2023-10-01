@@ -29,12 +29,16 @@ services:
       - web
 
   keycloak:
-    image:  quay.io/keycloak/keycloak:latest
-    command: -v start-dev --import-realm
+    image:  quay.io/keycloak/keycloak:22.0.1
+    command: start-dev --import-realm
+#    command: start-dev
 #    command: start-dev
     container_name: keycloak
     volumes:
-      - ./src/main/resources/keycloak:/opt/keycloak/data/import
+      - ./core/src/main/resources/keycloak:/opt/keycloak/data/import
+      - ./themes:/opt/keycloak/themes
+      - ./spi/target/custom-spi.jar:/opt/keycloak/providers/custom-spi.jar
+#      - ./spi/target/keycloak-2fa-email-authenticator-1.0.0.0-SNAPSHOT.jar:/opt/keycloak/providers/keycloak-2fa-email-authenticator-1.0.0.0-SNAPSHOT.jar.jar
     ports:
       - "8082:8080"
     environment:
