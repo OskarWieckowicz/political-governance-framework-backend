@@ -37,7 +37,10 @@ public class PersistencePgfConfiguration {
                 "spring.jpa.database-platform",
                 Objects.requireNonNull(env.getProperty("spring.jpa.database-platform")),
                 "spring.jpa.hibernate.ddl-auto",
-                Objects.requireNonNull(env.getProperty("spring.jpa.hibernate.ddl-auto")))
+                Objects.requireNonNull(env.getProperty("spring.jpa.hibernate.ddl-auto")),
+                "hibernate.physical_naming_strategy", "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy",
+        "hibernate.implicit_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
+            )
         );
         return em;
     }

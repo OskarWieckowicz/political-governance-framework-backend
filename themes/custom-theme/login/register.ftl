@@ -61,6 +61,36 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="${properties.kcLabelWrapperClass!}">
+                    <label for="user.attributes.country" class="${properties.kcLabelClass!}">Country</label>
+                </div>
+
+                <div class="${properties.kcInputWrapperClass!}">
+                    <input type="text" class="${properties.kcInputClass!}" id="user.attributes.country" name="user.attributes.country" value="${(register.formData['user.attributes.country']!'')}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="${properties.kcLabelWrapperClass!}">
+                    <label for="user.attributes.country" class="${properties.kcLabelClass!}">Street</label>
+                </div>
+
+                <div class="${properties.kcInputWrapperClass!}">
+                    <input type="text" class="${properties.kcInputClass!}" id="user.attributes.street" name="user.attributes.street" value="${(register.formData['user.attributes.street']!'')}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="${properties.kcLabelWrapperClass!}">
+                    <label for="user.attributes.country" class="${properties.kcLabelClass!}">Postal code</label>
+                </div>
+
+                <div class="${properties.kcInputWrapperClass!}">
+                    <input type="text" class="${properties.kcInputClass!}" id="user.attributes.postalCode" name="user.attributes.postalCode" value="${(register.formData['user.attributes.postalCode']!'')}"/>
+                </div>
+            </div>
+
             <div class="${properties.kcFormGroupClass!}">
                 <div class="${properties.kcLabelWrapperClass!}">
                     <label for="email" class="${properties.kcLabelClass!}">${msg("email")}</label>

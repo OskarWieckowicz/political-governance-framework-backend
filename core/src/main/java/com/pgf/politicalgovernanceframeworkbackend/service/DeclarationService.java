@@ -2,7 +2,7 @@ package com.pgf.politicalgovernanceframeworkbackend.service;
 
 import com.pgf.politicalgovernanceframeworkbackend.converter.DeclarationConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.DeclarationDto;
-import com.pgf.politicalgovernanceframeworkbackend.dto.request.DeclarationRequest;
+import com.pgf.politicalgovernanceframeworkbackend.fto.DeclarationRequest;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.Declaration;
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.DeclarationRepository;
 import com.pgf.politicalgovernanceframeworkbackend.utils.Constants;

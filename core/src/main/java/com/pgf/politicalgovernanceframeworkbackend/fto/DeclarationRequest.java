@@ -1,4 +1,4 @@
-package com.pgf.politicalgovernanceframeworkbackend.dto.request;
+package com.pgf.politicalgovernanceframeworkbackend.fto;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,5 +1,6 @@
 package com.pgf.provider;
 
+import java.util.UUID;
 import org.keycloak.authentication.FormAction;
 import org.keycloak.authentication.FormContext;
 import org.keycloak.authentication.ValidationContext;
@@ -22,7 +23,7 @@ public class TaxIdGenerator implements FormAction {
     @Override
     public void success(FormContext context) {
         UserModel user = context.getUser();
-        user.setSingleAttribute("taxId", "xd");
+        user.setSingleAttribute("taxId", UUID.randomUUID().toString());
     }
 
     @Override

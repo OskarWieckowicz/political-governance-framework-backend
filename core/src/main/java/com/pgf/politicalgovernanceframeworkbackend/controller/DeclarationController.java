@@ -1,11 +1,8 @@
 package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.DeclarationDto;
-import com.pgf.politicalgovernanceframeworkbackend.dto.request.DeclarationRequest;
-import com.pgf.politicalgovernanceframeworkbackend.entity.keycloak.User;
-import com.pgf.politicalgovernanceframeworkbackend.repository.keycloak.UserRepository;
+import com.pgf.politicalgovernanceframeworkbackend.fto.DeclarationRequest;
 import com.pgf.politicalgovernanceframeworkbackend.service.DeclarationService;
-import java.security.Principal;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,23 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 class DeclarationController {
 
-    private final DeclarationService service;
-    private final UserRepository repository;
+    private final DeclarationService declarationService;
 
     @GetMapping("/history")
-    List<DeclarationDto> getDeclarationHistory(Principal principal) {
-        principal.getName();
-        List<User> all = repository.findAll();
-        return service.findAllDeclarations();
+    List<DeclarationDto> getDeclarationHistory() {
+        return declarationService.findAllDeclarations();
     }
 
     @PutMapping
     DeclarationDto addDeclaration(@RequestBody DeclarationRequest declarationRequestBody) {
-        return service.createOrUpdateDeclaration(declarationRequestBody);
+        return declarationService.createOrUpdateDeclaration(declarationRequestBody);
     }
 
     @GetMapping
     DeclarationDto getCurrentDeclaration() {
-        return service.getCurrentDeclaration();
+        return declarationService.getCurrentDeclaration();
     }
 }
