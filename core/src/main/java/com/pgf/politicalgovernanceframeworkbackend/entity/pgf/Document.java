@@ -18,5 +18,5 @@ public class Document {
     private float amount;
     private String type;
     private String file;
-
+    private String userId;
 }

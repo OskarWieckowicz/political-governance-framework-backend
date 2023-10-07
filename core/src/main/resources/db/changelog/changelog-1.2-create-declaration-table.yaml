@@ -26,3 +26,6 @@ databaseChangeLog:
               - column:
                   name: taxes
                   type: float
+              - column:
+                  name: user_id
+                  type: VARCHAR(255)

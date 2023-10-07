@@ -1,7 +1,6 @@
 package com.pgf.politicalgovernanceframeworkbackend.entity.keycloak;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +25,6 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private String email;
-
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserAttribute> attributes;
-
 }

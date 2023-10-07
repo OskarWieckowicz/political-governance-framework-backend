@@ -24,3 +24,6 @@ databaseChangeLog:
               - column:
                   name: file
                   type: VARCHAR(255)
+              - column:
+                  name: user_id
+                  type: VARCHAR(255)

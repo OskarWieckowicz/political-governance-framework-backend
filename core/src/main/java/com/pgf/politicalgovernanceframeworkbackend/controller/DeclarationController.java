@@ -3,6 +3,7 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 import com.pgf.politicalgovernanceframeworkbackend.dto.DeclarationDto;
 import com.pgf.politicalgovernanceframeworkbackend.fto.DeclarationRequest;
 import com.pgf.politicalgovernanceframeworkbackend.service.DeclarationService;
+import java.security.Principal;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,17 +20,17 @@ class DeclarationController {
     private final DeclarationService declarationService;
 
     @GetMapping("/history")
-    List<DeclarationDto> getDeclarationHistory() {
-        return declarationService.findAllDeclarations();
+    List<DeclarationDto> getDeclarationHistory(Principal principal) {
+        return declarationService.findAllDeclarations(principal.getName());
     }
 
     @PutMapping
-    DeclarationDto addDeclaration(@RequestBody DeclarationRequest declarationRequestBody) {
-        return declarationService.createOrUpdateDeclaration(declarationRequestBody);
+    DeclarationDto addDeclaration(@RequestBody DeclarationRequest declarationRequestBody, Principal principal) {
+        return declarationService.createOrUpdateDeclaration(declarationRequestBody, principal.getName());
     }
 
     @GetMapping
-    DeclarationDto getCurrentDeclaration() {
-        return declarationService.getCurrentDeclaration();
+    DeclarationDto getCurrentDeclaration(Principal principal) {
+        return declarationService.getCurrentDeclaration(principal.getName());
     }
 }

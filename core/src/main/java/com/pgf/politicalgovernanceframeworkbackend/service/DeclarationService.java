@@ -21,8 +21,8 @@ public class DeclarationService {
     private final DeclarationConverter converter;
     private final DeclarationRepository repository;
 
-    public DeclarationDto createOrUpdateDeclaration(DeclarationRequest declarationRequest) {
-        Optional<Declaration> declarationOptional = repository.findByBillingPeriod(getLastBillingPeriod());
+    public DeclarationDto createOrUpdateDeclaration(DeclarationRequest declarationRequest, String userId) {
+        Optional<Declaration> declarationOptional = repository.findByBillingPeriodAndUserId(getLastBillingPeriod(), userId);
         if (declarationOptional.isPresent()) {
             float income = declarationRequest.getRevenue() - declarationRequest.getExpense();
             Declaration declaration = declarationOptional.get();
@@ -39,19 +39,20 @@ public class DeclarationService {
                 .billingPeriod(getLastBillingPeriod())
                 .income(income)
                 .taxes(Constants.TAX_PERCENTAGE * income)
+                .userId(userId)
                 .build();
             Declaration savedDeclaration = repository.save(declaration);
             return converter.declarationToDeclarationDto(savedDeclaration);
         }
     }
 
-    public DeclarationDto getCurrentDeclaration() {
-        Optional<Declaration> declaration = repository.findByBillingPeriod(getLastBillingPeriod());
+    public DeclarationDto getCurrentDeclaration(String userId) {
+        Optional<Declaration> declaration = repository.findByBillingPeriodAndUserId(getLastBillingPeriod(), userId);
         return declaration.map(converter::declarationToDeclarationDto).orElse(DeclarationDto.builder().build());
     }
 
-    public List<DeclarationDto> findAllDeclarations() {
-        List<Declaration> foundDeclarations = repository.findAll();
+    public List<DeclarationDto> findAllDeclarations(String userId) {
+        List<Declaration> foundDeclarations = repository.findAllByUserId(userId);
         return foundDeclarations.stream().map(converter::declarationToDeclarationDto).toList();
     }
 

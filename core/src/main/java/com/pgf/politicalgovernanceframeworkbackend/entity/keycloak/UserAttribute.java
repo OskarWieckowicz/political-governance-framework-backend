@@ -22,7 +22,6 @@ public class UserAttribute {
     private String id;
     private String name;
     private String value;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;

@@ -17,11 +17,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Declaration {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String billingPeriod;
     private float revenue;
     private float expense;
     private float income;
     private float taxes;
+    private String userId;
 }

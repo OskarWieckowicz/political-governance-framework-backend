@@ -2,6 +2,7 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.DocumentDto;
 import com.pgf.politicalgovernanceframeworkbackend.service.DocumentService;
+import java.security.Principal;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +20,14 @@ class DocumentController {
     private final DocumentService service;
 
     @GetMapping
-    List<DocumentDto> getDocuments() {
-        return service.getAllDocuments();
+    List<DocumentDto> getDocuments(Principal principal) {
+        return service.getAllDocuments(principal.getName());
     }
 
 
     @PostMapping
-    DocumentDto addDocument(@RequestBody DocumentDto documentDto) {
-        DocumentDto document = this.service.createDocument(documentDto);
+    DocumentDto addDocument(@RequestBody DocumentDto documentDto, Principal principal) {
+        DocumentDto document = this.service.createDocument(documentDto, principal.getName());
         return document;
     }
 }

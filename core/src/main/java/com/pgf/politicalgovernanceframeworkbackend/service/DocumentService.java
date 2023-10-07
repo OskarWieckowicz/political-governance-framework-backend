@@ -15,13 +15,14 @@ public class DocumentService {
     private final DocumentRepository repository;
     private final DocumentConverter converter;
 
-    public List<DocumentDto> getAllDocuments() {
-        List<Document> documents = repository.findAll();
+    public List<DocumentDto> getAllDocuments(String userId) {
+        List<Document> documents = repository.findAllByUserId(userId);
         return documents.stream().map(converter::documentToDocumentDto).toList();
     }
 
-    public DocumentDto createDocument(DocumentDto documentDto) {
+    public DocumentDto createDocument(DocumentDto documentDto, String userId) {
         Document document = converter.documentDtoToDocument(documentDto);
+        document.setUserId(userId);
         Document savedDocument = repository.save(document);
         return converter.documentToDocumentDto(savedDocument);
     }
