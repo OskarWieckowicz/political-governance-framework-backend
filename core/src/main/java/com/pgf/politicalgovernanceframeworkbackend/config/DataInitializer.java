@@ -75,7 +75,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
                                         """)
                 .site("https://www.gov.pl/web/infrastruktura")
                 .leader("Andrzej Adamczyk")
-                .smartContractAddress("0x06f333ca1c1b3d08f487d67a5a377cb92d3695ba85d4cc30855733d6a160lakr")
+                .smartContractAddress("0x36D0fF48DC819749c89baf8B4114b71Bff89dff0")
                 .balance(BigInteger.valueOf(1254514))
                 .citizensSatisfaction(4.20f)
                 .build());
@@ -93,7 +93,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
                     """)
                 .site("https://www.wojsko-polskie.pl/")
                 .leader("Mariusz Błaszczak")
-                .smartContractAddress("0x06f333ca1c1b3d08f487d67a5a377cb92d3695ba85d4cc30855733d6a160cabk")
+                .smartContractAddress("0x0689bEa3a0c8276F5E0b2f43212eC6E2bfCd1c6d")
                 .balance(BigInteger.valueOf(354514))
                 .citizensSatisfaction(3.20f)
                 .build());
@@ -110,7 +110,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
                     """)
                 .site("https://pacjent.gov.pl/system-opieki-zdrowotnej")
                 .leader("Katarzyna Sójka")
-                .smartContractAddress("0x06f333ca1c1b3d08f487d67a5a377cb92d3695ba85d4cc30855733d6a160cabk")
+                .smartContractAddress("0x209508E1C83ecAeBBFe62AD7388DbacDddeddDC7")
                 .balance(BigInteger.valueOf(354514))
                 .citizensSatisfaction(1.20f)
                 .build());
@@ -131,7 +131,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
                     """)
                 .site("https://www.gov.pl/web/edukacja-i-nauka")
                 .leader("Przemysław Czarnek")
-                .smartContractAddress("0x06f333ca1c1b3d08f487d67a5a377cb92d3695ba85d4cc30855733d6a160cabc")
+                .smartContractAddress("0xf3828C26A864C49775E2731a369062Acc19a4EDB")
                 .balance(BigInteger.valueOf(124514))
                 .citizensSatisfaction(3.94f)
                 .build());
@@ -156,7 +156,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
                 )
                 .site("https://european-union.europa.eu/")
                 .leader("Ursula von der Leyen")
-                .smartContractAddress("0x06f333ca1c1b3d08f487d67a5a377cb92d3695ba85d4cc30855733d6a160caba")
+                .smartContractAddress("0x9D6683Cd4F0783c161a7B705A1af04994B5fF05D")
                 .balance(BigInteger.valueOf(124414))
                 .citizensSatisfaction(2.94f)
                 .build());

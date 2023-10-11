@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: owieckowicz
+      changes:
+        - createTable:
+            tableName: tax_distribution
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: destination
+                  type: VARCHAR(255)
+              - column:
+                  name: percentage
+                  type: INT
+              - column:
+                  name: taxes_distribution_declaration_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: FK_TaxDistribution_TaxesDistributionDeclaration
+                    references: taxes_distribution_declaration(id)

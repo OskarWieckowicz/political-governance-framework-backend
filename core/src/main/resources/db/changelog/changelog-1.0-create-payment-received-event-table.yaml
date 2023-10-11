@@ -27,3 +27,6 @@ databaseChangeLog:
               - column:
                   name: block_number
                   type: BIGINT
+              - column:
+                  name: contract_address
+                  type: VARCHAR(255)

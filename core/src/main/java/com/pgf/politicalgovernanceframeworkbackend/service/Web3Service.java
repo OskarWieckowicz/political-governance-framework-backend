@@ -24,9 +24,8 @@ public class Web3Service {
 
     private Web3j web3j;
 
-    public Flowable<TaxOffice.PaymentReceivedEventResponse> getPaymentReceivedLogs(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
+    public Flowable<TaxOffice.PaymentReceivedEventResponse> getPaymentReceivedLogs(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock, String contractAddress) {
         this.web3j = Web3j.build(new HttpService(INFURA_ENDPOINT));
-        String contractAddress = "0x8EaDcAB625d964ebF2b0eD904B81132Fc55560e8";
         TaxOffice contract = TaxOffice.load(contractAddress, web3j, Credentials.create(PRIVATE_KEY), new DefaultGasProvider());
         return contract
                 .paymentReceivedEventFlowable(startBlock, endBlock);

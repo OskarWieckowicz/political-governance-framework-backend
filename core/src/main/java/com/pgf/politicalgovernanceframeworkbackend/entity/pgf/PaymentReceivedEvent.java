@@ -21,4 +21,5 @@ public class PaymentReceivedEvent {
     private String transactionHash;
     private BigInteger timestamp;
     private BigInteger blockNumber;
+    private String contractAddress;
 }
