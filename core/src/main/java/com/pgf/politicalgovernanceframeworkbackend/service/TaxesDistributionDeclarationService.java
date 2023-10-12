@@ -29,7 +29,7 @@ public class TaxesDistributionDeclarationService {
                     TaxDistribution.builder().destination("Health Care").percentage(20).build(),
                     TaxDistribution.builder().destination("Army").percentage(10).build(),
                     TaxDistribution.builder().destination("Infrastructure").percentage(20).build(),
-                    TaxDistribution.builder().destination("UE").percentage(10).build()
+                    TaxDistribution.builder().destination("European Union").percentage(10).build()
                 )
             ).submitted(false).build();
         Optional<TaxesDistributionDeclaration> optionalTaxesDistributionDeclaration =

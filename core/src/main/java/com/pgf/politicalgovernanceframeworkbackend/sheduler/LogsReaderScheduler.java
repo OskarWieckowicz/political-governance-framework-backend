@@ -12,6 +12,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;
@@ -29,16 +30,20 @@ public class LogsReaderScheduler {
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
     private final TaxBeneficiaryDetailsService taxBeneficiaryDetailsService;
 
-    //    @Scheduled(fixedRate = 20000)
+//    @Scheduled(fixedRate = 20000)
     public void task() {
         log.info("Scheduled Task started!");
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =
             taxBeneficiaryDetailsService.getAllTaxBeneficiariesDetails();
 
-        for (TaxBeneficiaryDetailsDto taxBeneficiaryDetailsDto: allTaxBeneficiariesDetails) {
+        for (TaxBeneficiaryDetailsDto taxBeneficiaryDetailsDto : allTaxBeneficiariesDetails) {
+
+            log.info("Scheduled Task for:{}", taxBeneficiaryDetailsDto.getName());
 
             Optional<PaymentReceivedEvent> latestPaymentReceivedEvent =
-                paymentReceivedEventRepository.findTopByOrderByIdDesc();
+                paymentReceivedEventRepository.findTopByContractAddressOrderByTimestampDesc(
+                    taxBeneficiaryDetailsDto.getSmartContractAddress());
+
             DefaultBlockParameter startingBlock = latestPaymentReceivedEvent
                 .map(receivedEvent -> DefaultBlockParameter.valueOf(receivedEvent.getBlockNumber().add(BigInteger.ONE)))
                 .orElse(DefaultBlockParameterName.EARLIEST);

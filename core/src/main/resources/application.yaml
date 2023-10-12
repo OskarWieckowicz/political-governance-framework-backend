@@ -27,6 +27,7 @@ spring:
 
 infura-endpoint:
 private-key:
+coinapi-key:
 
 logging:
   level:

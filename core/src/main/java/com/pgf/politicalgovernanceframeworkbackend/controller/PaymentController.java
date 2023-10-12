@@ -1,32 +1,22 @@
 package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.PaymentDto;
+import java.security.Principal;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
+import com.pgf.politicalgovernanceframeworkbackend.service.PaymentService;
 
 @RestController
 @RequestMapping("/payments")
+@RequiredArgsConstructor
 class PaymentController {
+    private final PaymentService paymentService;
 
     @GetMapping
-    List<PaymentDto> getPayments() {
-        PaymentDto paymentDto1 = PaymentDto.builder()
-                .percentage(20)
-                .destination("Education")
-                .contractAddress("0xadafawwadadwaddaaddad")
-                .value(150f)
-                .paid(90f)
-                .build();
-        PaymentDto paymentDto2 = PaymentDto.builder()
-                .percentage(30)
-                .destination("Health Care")
-                .contractAddress("0x314513441242124")
-                .value(120f)
-                .paid(40f)
-                .build();
-        return List.of(paymentDto1, paymentDto2);
+    List<PaymentDto> getPayments(Principal principal) {
+        return this.paymentService.findByUserId(principal.getName());
     }
 }

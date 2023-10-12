@@ -1,5 +1,6 @@
 package com.pgf.politicalgovernanceframeworkbackend.dto;
 
+import java.math.BigInteger;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,6 +10,6 @@ public class PaymentDto {
     private int percentage;
     private String destination;
     private String contractAddress;
-    private float value;
-    private float paid;
+    private BigInteger toBePaid;
+    private BigInteger paid;
 }

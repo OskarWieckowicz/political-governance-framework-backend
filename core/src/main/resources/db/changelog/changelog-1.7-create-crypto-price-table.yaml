@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: createCryptoPriceTable
+      author: owieckowicz
+      changes:
+        - createTable:
+            tableName: crypto_price
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: symbol
+                  type: VARCHAR(255)
+              - column:
+                  name: price
+                  type: DOUBLE
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP
+                  defaultValueComputed: 'CURRENT_TIMESTAMP'
