@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn-example
+      author: owieckowicz
+      changes:
+        - addColumn:
+            tableName: tax_distribution
+            columns:
+              - column:
+                  name: to_be_paid
+                  type: BIGINT

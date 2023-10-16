@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: make-transaction-hash-unique
+      author: owieckowicz
+      changes:
+        - addUniqueConstraint:
+            tableName: payment_received_event
+            columnNames: transaction_hash
+            constraintName: unique_transaction_hash

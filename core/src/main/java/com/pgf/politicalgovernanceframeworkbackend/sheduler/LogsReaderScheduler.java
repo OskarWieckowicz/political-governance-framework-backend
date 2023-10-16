@@ -30,15 +30,13 @@ public class LogsReaderScheduler {
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
     private final TaxBeneficiaryDetailsService taxBeneficiaryDetailsService;
 
-//    @Scheduled(fixedRate = 20000)
+//    @Scheduled(fixedRate = 40000)
     public void task() {
-        log.info("Scheduled Task started!");
+        log.info("LogsReaderScheduler started!");
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =
             taxBeneficiaryDetailsService.getAllTaxBeneficiariesDetails();
 
         for (TaxBeneficiaryDetailsDto taxBeneficiaryDetailsDto : allTaxBeneficiariesDetails) {
-
-            log.info("Scheduled Task for:{}", taxBeneficiaryDetailsDto.getName());
 
             Optional<PaymentReceivedEvent> latestPaymentReceivedEvent =
                 paymentReceivedEventRepository.findTopByContractAddressOrderByTimestampDesc(

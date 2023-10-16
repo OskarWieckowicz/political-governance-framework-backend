@@ -15,3 +15,7 @@ databaseChangeLog:
       file: db/changelog/changelog-1.6-create-tax-distribution-table.yaml
   - include:
       file: db/changelog/changelog-1.7-create-crypto-price-table.yaml
+  - include:
+      file: db/changelog/changelog-1.8-alter-payment-received-event-table.yaml
+  - include:
+      file: db/changelog/changelog-1.9-alter-tax-distribution-table.yaml

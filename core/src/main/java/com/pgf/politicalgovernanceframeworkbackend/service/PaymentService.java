@@ -1,15 +1,12 @@
 package com.pgf.politicalgovernanceframeworkbackend.service;
 
-import com.pgf.politicalgovernanceframeworkbackend.dto.DeclarationDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.PaymentDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.PaymentReceivedEventDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxDistributionDto;
-import com.pgf.politicalgovernanceframeworkbackend.dto.TaxesDistributionDeclarationDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.UserAttributeDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.UserDto;
 import com.pgf.politicalgovernanceframeworkbackend.exception.NotFoundException;
-import com.pgf.politicalgovernanceframeworkbackend.utils.EthereumUtils;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,77 +20,44 @@ public class PaymentService {
     private final PaymentReceivedEventService paymentReceivedEventService;
     private final TaxBeneficiaryDetailsService taxBeneficiaryDetailsService;
     private final UserService userService;
-    private final DeclarationService declarationService;
     private final TaxesDistributionDeclarationService taxesDistributionDeclarationService;
-    private final CryptoPriceService cryptoPriceService;
 
     public List<PaymentDto> findByUserId(String userId) {
-//        PaymentDto paymentDto1 = PaymentDto.builder()
-//            .percentage(20)
-//            .destination("Education")
-//            .contractAddress("0xadafawwadadwaddaaddad")
-//            .value(150f)
-//            .paid(90f)
-//            .build();
-//        PaymentDto paymentDto2 = PaymentDto.builder()
-//            .percentage(30)
-//            .destination("Health Care")
-//            .contractAddress("0x314513441242124")
-//            .value(120f)
-//            .paid(40f)
-//            .build();
-//        return List.of(paymentDto1, paymentDto2);
 
         UserDto userDto = userService.findById(userId);
 
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =
             taxBeneficiaryDetailsService.getAllTaxBeneficiariesDetails();
 
-        TaxesDistributionDeclarationDto taxesDistributionDeclarationDto =
-            taxesDistributionDeclarationService.findByUserId(userId);
-
-        DeclarationDto currentDeclaration = declarationService.getCurrentDeclaration(userId);
 
         List<PaymentDto> payments = new ArrayList<>();
+
+        List<TaxDistributionDto> distributions =
+            taxesDistributionDeclarationService.findByUserId(userId).getDistributions();
 
         for (TaxBeneficiaryDetailsDto taxBeneficiaryDetailsDto : allTaxBeneficiariesDetails) {
             String taxId = getTaxId(userDto);
             List<PaymentReceivedEventDto> events =
                 paymentReceivedEventService.findEvents(taxId, taxBeneficiaryDetailsDto.getSmartContractAddress());
+
+            TaxDistributionDto taxDistributionDto = distributions.stream()
+                .filter(distribution -> distribution.getDestination().equals(taxBeneficiaryDetailsDto.getName()))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Tax distribution not found"));
+
             BigInteger totalPaymentsAmount = getTotalPaymentsFromEvents(events);
+            BigInteger toBePaid = taxDistributionDto.getToBePaid();
+            BigInteger leftToPay = calculateLeftToPay(toBePaid, totalPaymentsAmount);
             payments.add(PaymentDto.builder()
                 .contractAddress(taxBeneficiaryDetailsDto.getSmartContractAddress())
                 .destination(taxBeneficiaryDetailsDto.getName())
-                .toBePaid(
-                    getToBePaidValue(
-                        currentDeclaration.getTaxes(),
-                        taxesDistributionDeclarationDto,
-                        taxBeneficiaryDetailsDto.getName()
-                    )
-                )
+                .toBePaid(toBePaid)
                 .paid(totalPaymentsAmount)
+                .leftToPay(leftToPay)
                 .build());
         }
         return payments;
     }
-
-    private BigInteger getToBePaidValue(float taxes,
-                                   TaxesDistributionDeclarationDto taxesDistributionDeclarationDto,
-                                   String nameOfTheBeneficiary) {
-        double percentage = getPercentage(taxesDistributionDeclarationDto, nameOfTheBeneficiary).doubleValue();
-        double plnValue =  percentage / 100 * taxes;
-        double ethPrice = cryptoPriceService.getEthPrice().getPrice();
-        double ethValue = ethPrice == 0 ? 0 : plnValue / ethPrice;
-        return EthereumUtils.ethToWei(ethValue);
-    }
-
-    private static Integer getPercentage(TaxesDistributionDeclarationDto taxesDistributionDeclarationDto,
-                                         String nameOfTheBeneficiary) {
-        return taxesDistributionDeclarationDto.getDistributions().stream()
-            .filter(taxDistributionDto -> taxDistributionDto.getDestination().equals(nameOfTheBeneficiary)).findFirst()
-            .map(TaxDistributionDto::getPercentage).orElseThrow(() -> new NotFoundException("Percentage not found!"));
-    }
-
 
     private String getTaxId(UserDto userDto) {
         return userDto.getAttributes().stream()
@@ -111,4 +75,15 @@ public class PaymentService {
         }
         return totalPayments;
     }
+
+    private BigInteger calculateLeftToPay(BigInteger toBePaid, BigInteger paid) {
+        int comparisonResult = toBePaid.compareTo(paid);
+
+        if (comparisonResult > 0) {
+            return toBePaid.subtract(paid);
+        } else {
+            return BigInteger.ZERO;
+        }
+    }
 }
+

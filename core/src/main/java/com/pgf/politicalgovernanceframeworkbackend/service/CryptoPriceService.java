@@ -6,6 +6,7 @@ import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.CryptoPrice;
 import com.pgf.politicalgovernanceframeworkbackend.exception.NotFoundException;
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.CryptoPriceRepository;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,9 @@ public class CryptoPriceService {
         CryptoPrice cryptoPrice =
             repository.findFirstBySymbol("ETH/PLN").orElse(CryptoPrice.builder().symbol("ETH/PLN").build());
         Double ethPlnPrice = cryptoPriceClientService.getEthPlnPrice();
-        cryptoPrice.setPrice(ethPlnPrice);
+        if(Objects.nonNull(ethPlnPrice)) {
+            cryptoPrice.setPrice(ethPlnPrice);
+        }
         cryptoPrice.setTimestamp(LocalDateTime.now());
         repository.save(cryptoPrice);
     }

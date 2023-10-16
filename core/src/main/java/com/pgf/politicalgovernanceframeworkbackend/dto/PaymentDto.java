@@ -12,4 +12,5 @@ public class PaymentDto {
     private String contractAddress;
     private BigInteger toBePaid;
     private BigInteger paid;
+    private BigInteger leftToPay;
 }

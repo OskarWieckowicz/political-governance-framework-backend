@@ -1,6 +1,7 @@
 package com.pgf.politicalgovernanceframeworkbackend.entity.pgf;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class PaymentReceivedEvent {
     private UUID id;
     public String taxIdentifier;
     public BigInteger amount;
+    @Column(unique = true)
     private String transactionHash;
     private BigInteger timestamp;
     private BigInteger blockNumber;

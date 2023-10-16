@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.math.BigInteger;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class TaxDistribution {
     private Long id;
     private String destination;
     private int percentage;
+    private BigInteger toBePaid;
     @ManyToOne
     @JoinColumn(name = "taxes_distribution_declaration_id")
     private TaxesDistributionDeclaration taxDistributionDeclaration;

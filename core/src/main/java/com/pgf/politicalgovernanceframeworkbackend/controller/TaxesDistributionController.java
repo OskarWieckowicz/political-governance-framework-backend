@@ -19,7 +19,8 @@ public class TaxesDistributionController {
     private final TaxesDistributionDeclarationService service;
     @GetMapping
     TaxesDistributionDeclarationDto getTaxesDistributionDeclaration(Principal principal) {
-        return service.findByUserId(principal.getName());
+        TaxesDistributionDeclarationDto byUserId = service.findByUserId(principal.getName());
+        return byUserId;
     }
 
     @PostMapping
