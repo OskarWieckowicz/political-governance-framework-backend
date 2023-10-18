@@ -30,7 +30,7 @@ public class LogsReaderScheduler {
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
     private final TaxBeneficiaryDetailsService taxBeneficiaryDetailsService;
 
-//    @Scheduled(fixedRate = 40000)
+    @Scheduled(fixedRate = 40000)
     public void task() {
         log.info("LogsReaderScheduler started!");
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =
@@ -67,7 +67,11 @@ public class LogsReaderScheduler {
 
             EthBlock.Block block = web3Service.getBlockByHash(blockHash);
             paymentReceivedEvent.setTimestamp(block.getTimestamp());
-            paymentReceivedEventRepository.save(paymentReceivedEvent);
+            Optional<PaymentReceivedEvent> existingRecord =
+                paymentReceivedEventRepository.findByTransactionHash(event.log.getTransactionHash());
+            if (existingRecord.isEmpty()) {
+                paymentReceivedEventRepository.save(paymentReceivedEvent);
+            }
         };
     }
 }

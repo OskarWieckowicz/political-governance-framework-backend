@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface PaymentReceivedEventRepository extends JpaRepository<PaymentReceivedEvent, UUID> {
     Optional<PaymentReceivedEvent> findTopByContractAddressOrderByTimestampDesc(String contractAddress);
     List<PaymentReceivedEvent> findAllByTaxIdentifierAndContractAddress(String taxIdentifier, String contractAddress);
+    Optional<PaymentReceivedEvent> findByTransactionHash(String transactionHash);
 }

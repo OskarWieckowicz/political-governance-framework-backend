@@ -7,7 +7,6 @@ import com.pgf.politicalgovernanceframeworkbackend.dto.TaxDistributionDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxesDistributionDeclarationDto;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxDistribution;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxesDistributionDeclaration;
-import com.pgf.politicalgovernanceframeworkbackend.exception.NotFoundException;
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.TaxesDistributionDeclarationRepository;
 import com.pgf.politicalgovernanceframeworkbackend.utils.EthereumUtils;
 import java.math.BigInteger;
@@ -50,14 +49,9 @@ public class TaxesDistributionDeclarationService {
         // TODO: add distribution sum eq 100 validation
         DeclarationDto currentDeclaration = declarationService.getCurrentDeclaration(userId);
 
-        TaxesDistributionDeclarationDto taxesDistributionDeclarationDto = this.findByUserId(userId);
-
         taxDistributionDtos.forEach(
             taxDistributionDto -> taxDistributionDto.setToBePaid(
-                getToBePaidValue(
-                    currentDeclaration.getTaxes(),
-                    taxesDistributionDeclarationDto,
-                    taxDistributionDto.getDestination())
+                getToBePaidValue(currentDeclaration.getTaxes(), taxDistributionDto)
             )
         );
 
@@ -75,22 +69,12 @@ public class TaxesDistributionDeclarationService {
         return taxesDistributionDeclarationConverter.convertTo(repository.save(taxesDistributionDeclaration));
     }
 
-    private BigInteger getToBePaidValue(float taxes,
-                                        TaxesDistributionDeclarationDto taxesDistributionDeclarationDto,
-                                        String nameOfTheBeneficiary) {
-        double percentage = getPercentage(taxesDistributionDeclarationDto, nameOfTheBeneficiary).doubleValue();
+    private BigInteger getToBePaidValue(float taxes, TaxDistributionDto taxesDistributionDto) {
+        double percentage = taxesDistributionDto.getPercentage();
         double plnValue = percentage / 100 * taxes;
         double ethPrice = cryptoPriceService.getEthPrice().getPrice();
         double ethValue = ethPrice == 0 ? 0 : plnValue / ethPrice;
         return EthereumUtils.ethToWei(ethValue);
     }
 
-    private static Integer getPercentage(TaxesDistributionDeclarationDto taxesDistributionDeclarationDto,
-                                         String nameOfTheBeneficiary) {
-        return taxesDistributionDeclarationDto.getDistributions().stream()
-            .filter(taxDistributionDto -> taxDistributionDto.getDestination().equals(nameOfTheBeneficiary))
-            .findFirst()
-            .map(TaxDistributionDto::getPercentage)
-            .orElseThrow(() -> new NotFoundException("Percentage not found!"));
-    }
 }
