@@ -19,3 +19,11 @@ databaseChangeLog:
       file: db/changelog/changelog-1.8-alter-payment-received-event-table.yaml
   - include:
       file: db/changelog/changelog-1.9-alter-tax-distribution-table.yaml
+  - include:
+      file: db/changelog/changelog-2.0-drop-tax-beneficiary-tables.yaml
+  - include:
+      file: db/changelog/changelog-2.1-create-new-tax-beneficiary-table.yaml
+  - include:
+      file: db/changelog/changelog-2.2-create-rating-table.yaml
+  - include:
+      file: db/changelog/changelog-2.3-insert-data-into-tax-beneficiary.yaml

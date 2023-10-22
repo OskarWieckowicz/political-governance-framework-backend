@@ -1,5 +1,7 @@
 package com.pgf.politicalgovernanceframeworkbackend.service;
 
+import static com.pgf.politicalgovernanceframeworkbackend.utils.DateUtils.getLastBillingPeriod;
+
 import com.pgf.politicalgovernanceframeworkbackend.converter.DeclarationConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.DeclarationDto;
 import com.pgf.politicalgovernanceframeworkbackend.fto.DeclarationRequest;
@@ -56,14 +58,4 @@ public class DeclarationService {
         return foundDeclarations.stream().map(converter::declarationToDeclarationDto).toList();
     }
 
-    private String getLastBillingPeriod() {
-        LocalDate currentDate = LocalDate.now();
-
-        // Calculate the last month
-        LocalDate lastMonthDate = currentDate.minusMonths(1);
-
-        // Format the last month and year as "MM.yyyy"
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM.yyyy");
-        return lastMonthDate.format(formatter);
-    }
 }

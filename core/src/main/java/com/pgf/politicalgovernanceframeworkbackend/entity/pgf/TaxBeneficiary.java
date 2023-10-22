@@ -1,20 +1,27 @@
 package com.pgf.politicalgovernanceframeworkbackend.entity.pgf;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
-@Data
+@MappedSuperclass
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class TaxBeneficiary {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String image;
     private String name;
-    private String description;
-    private String img;
+
+    @Transient
     private float rating;
 }

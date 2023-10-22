@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class TaxBeneficiaryDetailsDto {
+    long id;
     private String image;
     private String name;
     private String description;
@@ -14,5 +15,5 @@ public class TaxBeneficiaryDetailsDto {
     private String leader;
     private String smartContractAddress;
     private BigInteger balance;
-    private float citizensSatisfaction;
+    private float rating;
 }

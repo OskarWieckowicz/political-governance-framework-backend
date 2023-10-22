@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: createRatingTable
+      author: owieckowicz
+      changes:
+        - createTable:
+            tableName: rating
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: value
+                  type: FLOAT
+              - column:
+                  name: billing_period
+                  type: VARCHAR(255)
+              - column:
+                  name: user_id
+                  type: VARCHAR(255)
+              - column:
+                  name: tax_beneficiary_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: FK_TaxBeneficiary_Rating
+                    references: tax_beneficiary(id)

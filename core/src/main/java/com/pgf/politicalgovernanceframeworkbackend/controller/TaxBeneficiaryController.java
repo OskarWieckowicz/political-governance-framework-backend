@@ -1,10 +1,10 @@
 package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
-import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDto;
+import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryIndividualDto;
 import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryDetailsService;
-import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryService;
-import java.math.BigInteger;
+import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryIndividualService;
+import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,16 +18,20 @@ import java.util.List;
 @RequestMapping("/taxBeneficiaries")
 class TaxBeneficiaryController {
 
-    private final TaxBeneficiaryService beneficiaryService;
+    private final TaxBeneficiaryIndividualService beneficiaryService;
     private final TaxBeneficiaryDetailsService beneficiaryDetailsService;
 
     @GetMapping
-    List<TaxBeneficiaryDto> getTaxBeneficiaries() {
-        return beneficiaryService.getTaxBeneficiaries();
+    List<TaxBeneficiaryIndividualDto> getTaxBeneficiaries(Principal principal) {
+        List<TaxBeneficiaryIndividualDto> taxBeneficiaries =
+            beneficiaryService.getTaxBeneficiaries(principal.getName());
+        return taxBeneficiaries;
     }
 
     @GetMapping("/details/{name}")
     TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@PathVariable String name) {
-        return beneficiaryDetailsService.getTaxBeneficiaryDetails(name);
+        TaxBeneficiaryDetailsDto taxBeneficiaryDetails = beneficiaryDetailsService.getTaxBeneficiaryDetails(name);
+        return taxBeneficiaryDetails;
+
     }
 }

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop tax_beneficiary and tax_beneficiary_details tables
+      author: owieckowicz
+      changes:
+        - dropTable:
+            tableName: tax_beneficiary
+        - dropTable:
+            tableName: tax_beneficiary_details

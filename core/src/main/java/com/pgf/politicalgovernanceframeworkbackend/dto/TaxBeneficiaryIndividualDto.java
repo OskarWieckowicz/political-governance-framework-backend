@@ -5,9 +5,10 @@ import lombok.Data;
 
 @Builder
 @Data
-public class TaxBeneficiaryDto {
+public class TaxBeneficiaryIndividualDto {
+    private long id;
     private String name;
     private String description;
-    private String img;
+    private String image;
     private float rating;
 }
