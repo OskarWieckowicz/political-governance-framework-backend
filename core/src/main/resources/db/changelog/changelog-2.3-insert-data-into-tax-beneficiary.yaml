@@ -5,7 +5,7 @@ databaseChangeLog:
       changes:
         - sql:
             sql: >
-              INSERT INTO tax_beneficiary (name, short_description, long_description, image, site, leader, smart_contract_address, balance)
+              INSERT INTO tax_beneficiary (name, short_description, long_description, image, site, leader, smart_contract_address)
               VALUES
               ('Education', 'Support public education initiatives and programs aimed at providing quality education to students.',
                'Between 2017 and 2023, Poland undertook a comprehensive education reform. 
@@ -15,7 +15,7 @@ databaseChangeLog:
                 Compulsory schooling applies to children and youth aged 7-15, while the obligation to receive an education extends until the age of 18. 
                 External exams have become pivotal, enabling access to higher education or the acquisition of professional diplomas. 
                 The reform aims to align the system with diverse student needs and career paths.',
-               '/education.jpg', 'https://www.gov.pl/web/edukacja-i-nauka', 'Przemysław Czarnek', '0xf3828C26A864C49775E2731a369062Acc19a4EDB', 124514),
+               '/education.jpg', 'https://www.gov.pl/web/edukacja-i-nauka', 'Przemysław Czarnek', '0xf3828C26A864C49775E2731a369062Acc19a4EDB'),
               ('Health Care', 'Contribute to public healthcare services and initiatives that improve access to medical care and promote well-being.',
                'Explore the Polish healthcare system, 
                 comprised of essential elements like medical practices, nurses, clinics, and hospitals. 
@@ -23,7 +23,7 @@ databaseChangeLog:
                 Specialist assessments lead to referrals for outpatient specialized care (ASC), allowing patient choice. 
                 Hospitalization options extend to NFZ-affiliated hospitals. Pharmacists offer valuable drug information. 
                 This system prioritizes patient choice and comprehensive medical care, promoting societal well-being.',
-               '/health-care.jpg', 'https://pacjent.gov.pl/system-opieki-zdrowotnej', 'Katarzyna Sójka', '0x209508E1C83ecAeBBFe62AD7388DbacDddeddDC7', 354514),
+               '/health-care.jpg', 'https://pacjent.gov.pl/system-opieki-zdrowotnej', 'Katarzyna Sójka', '0x209508E1C83ecAeBBFe62AD7388DbacDddeddDC7'),
               ('European Union', 'Show your support for the European Union and its efforts towards economic integration, peace, and cooperation among member countries.',
                'The main and central goal of EU development cooperation is the
                 eradication of poverty in the context of sustainable development,
@@ -38,7 +38,7 @@ databaseChangeLog:
                 rest are Member States'' initiatives implemented under national aid
                 schemes. The EU institutions and Member States have committed to
                 jointly achieving an ODA/GNI ratio of 0.7% by 2030.',
-               '/eu.jpg', 'https://european-union.europa.eu/', 'Ursula von der Leyen', '0x9D6683Cd4F0783c161a7B705A1af04994B5fF05D', 124414),
+               '/eu.jpg', 'https://european-union.europa.eu/', 'Ursula von der Leyen', '0x9D6683Cd4F0783c161a7B705A1af04994B5fF05D'),
               ('Army', 'Contribute to the defense and security of the nation by supporting the armed forces and their missions.',
                'The Polish military, under the Ministry of National Defense, is tasked with ensuring national security and defense.
                 It encompasses the Army, Air Force, Navy, and Special Forces.
@@ -47,10 +47,10 @@ databaseChangeLog:
                 It focuses on enhancing interoperability with NATO and allied forces, participating in joint exercises and missions.
                 Additionally, the military plays a crucial role in disaster response, humanitarian assistance, and international peacekeeping efforts. 
                 It is committed to upholding democratic values and contributing to global security initiatives.',
-               '/army.jpg', 'https://www.wojsko-polskie.pl/', 'Mariusz Błaszczak', '0x0689bEa3a0c8276F5E0b2f43212eC6E2bfCd1c6d', 354514),
+               '/army.jpg', 'https://www.wojsko-polskie.pl/', 'Mariusz Błaszczak', '0x0689bEa3a0c8276F5E0b2f43212eC6E2bfCd1c6d'),
               ('Infrastructure', 'Support the development and maintenance of national infrastructure projects, such as roads, bridges, and public transportation systems.',
                'The Ministry of Infrastructure in Poland is responsible for the development and management of the country''s infrastructure, 
                 including roads, railways, aviation, and energy. The funds are allocated for the modernization and construction of roads, 
                 railway lines, ports, and airports, enhancing transportation safety, and developing energy infrastructure. 
                 The ministry also ensures efficient utilization of EU funds and plans investments that positively impact economic growth and citizens'' quality of life.',
-               '/infrastructure.jpg', 'https://www.gov.pl/web/infrastruktura', 'Andrzej Adamczyk', '0x36D0FF48DC819749c89baf8B4114b71Bff89dff0', 1254514);
+               '/infrastructure.jpg', 'https://www.gov.pl/web/infrastruktura', 'Andrzej Adamczyk', '0x36D0FF48DC819749c89baf8B4114b71Bff89dff0');

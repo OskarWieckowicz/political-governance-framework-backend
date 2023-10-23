@@ -5,7 +5,9 @@ import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxBeneficiaryDetails;
 import com.pgf.politicalgovernanceframeworkbackend.exception.NotFoundException;
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.TaxBeneficiaryDetailsRepository;
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,15 +17,9 @@ import org.springframework.stereotype.Service;
 public class TaxBeneficiaryDetailsService {
     private final TaxBeneficiaryDetailsRepository repository;
     private final TaxBeneficiaryDetailsConverter converter;
+    private final Web3Service web3Service;
 
-    public void saveTaxBeneficiaryDetails(TaxBeneficiaryDetailsDto taxBeneficiaryDetailsDto) {
-        TaxBeneficiaryDetails taxBeneficiaryDetails =
-            converter.taxBeneficiaryDetailsDtoToTaxBeneficiaryDetails(taxBeneficiaryDetailsDto);
-        TaxBeneficiaryDetails save = repository.save(taxBeneficiaryDetails);
-        System.out.println(save);
-    }
-
-    public TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(String name) {
+    public TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(String name) throws IOException {
         TaxBeneficiaryDetails tbd = null;
         List<Object[]> results = repository.findByNameAndCalculateAverageRating(name);
         for (Object[] result : results) {
@@ -31,9 +27,12 @@ public class TaxBeneficiaryDetailsService {
             Double avgRating = (Double) result[1];
             tbd.setRating(avgRating.floatValue());
         }
-//        TaxBeneficiaryDetails taxBeneficiaryDetails =
-//            tbd.orElseThrow(() -> new NotFoundException("Tax beneficiary with name " + name + " not found"));
-        return converter.taxBeneficiaryDetailsToTaxBeneficiaryDetailsDto(tbd);
+        TaxBeneficiaryDetailsDto taxBeneficiaryDetailsDto =
+            converter.taxBeneficiaryDetailsToTaxBeneficiaryDetailsDto(tbd);
+        if(Objects.nonNull(taxBeneficiaryDetailsDto)) {
+            taxBeneficiaryDetailsDto.setBalance(web3Service.getEthBalance(taxBeneficiaryDetailsDto.getSmartContractAddress()));
+        }
+        return taxBeneficiaryDetailsDto;
     }
 
     public List<TaxBeneficiaryDetailsDto> getAllTaxBeneficiariesDetails() {

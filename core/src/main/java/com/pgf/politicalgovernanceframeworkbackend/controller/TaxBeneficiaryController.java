@@ -4,6 +4,7 @@ import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryIndividualDto;
 import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryDetailsService;
 import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryIndividualService;
+import java.io.IOException;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ class TaxBeneficiaryController {
     }
 
     @GetMapping("/details/{name}")
-    TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@PathVariable String name) {
+    TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@PathVariable String name) throws IOException {
         TaxBeneficiaryDetailsDto taxBeneficiaryDetails = beneficiaryDetailsService.getTaxBeneficiaryDetails(name);
         return taxBeneficiaryDetails;
 

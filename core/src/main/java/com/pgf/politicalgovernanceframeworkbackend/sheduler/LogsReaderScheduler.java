@@ -30,7 +30,7 @@ public class LogsReaderScheduler {
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
     private final TaxBeneficiaryDetailsService taxBeneficiaryDetailsService;
 
-//    @Scheduled(fixedRate = 40000)
+    @Scheduled(fixedRate = 40000)
     public void task() {
         log.info("LogsReaderScheduler started!");
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =

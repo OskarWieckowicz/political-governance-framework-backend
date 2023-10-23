@@ -24,15 +24,13 @@ public class TaxBeneficiaryDetails extends TaxBeneficiary {
     private String site;
     private String leader;
     private String smartContractAddress;
-    private BigInteger balance;
 
     public TaxBeneficiaryDetails(Long id, String image, String name, float rating, String description, String site,
-                                 String leader, String smartContractAddress, BigInteger balance) {
+                                 String leader, String smartContractAddress) {
         super(id, image, name, rating);
         this.description = description;
         this.site = site;
         this.leader = leader;
         this.smartContractAddress = smartContractAddress;
-        this.balance = balance;
     }
 }

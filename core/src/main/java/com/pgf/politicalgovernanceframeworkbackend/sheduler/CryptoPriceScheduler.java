@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class CryptoPriceScheduler {
     private final CryptoPriceService cryptoPriceService;
 
-//    @Scheduled(fixedRate = 900000)
+    @Scheduled(fixedRate = 900000)
     void updateCryptoPrice() {
         cryptoPriceService.updateEthPrice();
         log.info("Cryptocurrency price updated.");

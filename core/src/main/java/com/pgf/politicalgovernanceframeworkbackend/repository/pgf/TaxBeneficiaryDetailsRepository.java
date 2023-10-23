@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface TaxBeneficiaryDetailsRepository extends JpaRepository<TaxBeneficiaryDetails, Long> {
     @Query("SELECT NEW com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxBeneficiaryDetails(" +
         "tbd.id, tbd.image, tbd.name, 0, " +
-        "tbd.description, tbd.site, tbd.leader, tbd.smartContractAddress, tbd.balance) " +
+        "tbd.description, tbd.site, tbd.leader, tbd.smartContractAddress) " +
         "FROM TaxBeneficiaryDetails tbd " +
         "WHERE tbd.name = :name ")
     Optional<TaxBeneficiaryDetails> findByNameCustom(String name);
