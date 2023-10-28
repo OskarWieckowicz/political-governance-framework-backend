@@ -5,6 +5,7 @@ import com.pgf.politicalgovernanceframeworkbackend.dto.DocumentDto;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.Document;
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.DocumentRepository;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,12 @@ public class DocumentService {
         document.setUserId(userId);
         Document savedDocument = repository.save(document);
         return converter.documentToDocumentDto(savedDocument);
+    }
+
+
+    public boolean hasDocument(String key, String userId) {
+        Optional<Document> firstByFileAndUserId = repository.findFirstByKeyAndUserId(key, userId);
+        return firstByFileAndUserId.isPresent();
     }
 
 }

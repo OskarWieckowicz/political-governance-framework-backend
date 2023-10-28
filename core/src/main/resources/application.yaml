@@ -29,6 +29,12 @@ infura-endpoint:
 private-key:
 coinapi-key:
 
+aws:
+  access-key:
+  secret-key:
+  s3:
+    bucket-name:
+
 logging:
   level:
     org:

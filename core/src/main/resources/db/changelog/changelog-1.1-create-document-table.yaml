@@ -22,7 +22,10 @@ databaseChangeLog:
                   name: type
                   type: VARCHAR(255)
               - column:
-                  name: file
+                  name: file_name
+                  type: VARCHAR(255)
+              - column:
+                  name: key
                   type: VARCHAR(255)
               - column:
                   name: user_id

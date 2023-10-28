@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 2
+      id: TaxDistribution
       author: owieckowicz
       changes:
         - createTable:

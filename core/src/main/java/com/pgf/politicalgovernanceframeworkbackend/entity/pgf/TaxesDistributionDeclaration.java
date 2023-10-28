@@ -24,6 +24,6 @@ public class TaxesDistributionDeclaration {
     private Long id;
     boolean submitted;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "taxDistributionDeclaration")
-    List<TaxDistribution> distributions;
+    private List<TaxDistribution> distributions;
     private String userId;
 }
