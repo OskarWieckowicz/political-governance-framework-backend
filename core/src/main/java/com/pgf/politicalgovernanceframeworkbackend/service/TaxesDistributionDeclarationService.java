@@ -46,7 +46,15 @@ public class TaxesDistributionDeclarationService {
 
     public TaxesDistributionDeclarationDto createTaxesDistributionDeclaration(
         List<TaxDistributionDto> taxDistributionDtos, String userId) {
-        // TODO: add distribution sum eq 100 validation
+
+        int sumOfPercentages = taxDistributionDtos.stream()
+            .mapToInt(TaxDistributionDto::getPercentage)
+            .sum();
+
+        if (sumOfPercentages != 100) {
+            throw new IllegalArgumentException("The sum of percentages must equal 100%");
+        }
+
         DeclarationDto currentDeclaration = declarationService.getCurrentDeclaration(userId);
 
         taxDistributionDtos.forEach(

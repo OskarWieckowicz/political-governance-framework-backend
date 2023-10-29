@@ -1,5 +1,7 @@
 package com.pgf.politicalgovernanceframeworkbackend.service;
 
+import static com.pgf.politicalgovernanceframeworkbackend.utils.DateUtils.getLastBillingPeriod;
+
 import com.pgf.politicalgovernanceframeworkbackend.converter.TaxBeneficiaryConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryIndividualDto;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxBeneficiaryIndividual;
@@ -16,11 +18,7 @@ public class TaxBeneficiaryIndividualService {
 
     public List<TaxBeneficiaryIndividualDto> getTaxBeneficiaries(String userId) {
         List<TaxBeneficiaryIndividual> taxBeneficiaries =
-            repository.getAllTaxBeneficiariesIndividuals(userId, "10.2023");
+            repository.getAllTaxBeneficiariesIndividuals(userId, getLastBillingPeriod());
         return taxBeneficiaries.stream().map(converter::taxBeneficiaryToTaxBeneficiaryDto).toList();
-    }
-
-    public void saveBeneficiary(TaxBeneficiaryIndividualDto taxBeneficiaryDto) {
-        repository.save(converter.taxBeneficiaryDtoToTaxBeneficiary(taxBeneficiaryDto));
     }
 }

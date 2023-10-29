@@ -1,4 +1,7 @@
 package com.pgf.politicalgovernanceframeworkbackend.service;
+import static com.pgf.politicalgovernanceframeworkbackend.utils.Constants.COINAPI_API_BASE_URL;
+import static com.pgf.politicalgovernanceframeworkbackend.utils.Constants.X_COINAPI_KEY;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
@@ -10,17 +13,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CryptoPriceClientService {
-    private final String COINAPI_API_BASE_URL = "https://rest.coinapi.io/v1";
 
     @Value("${coinapi-key}")
-    private String API_KEY; // Replace with your CoinAPI key
+    private String API_KEY;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public Double getEthUsdPrice() {
         try {
             HttpClient httpClient = HttpClients.createDefault();
             HttpGet httpGet = new HttpGet(COINAPI_API_BASE_URL + "/exchangerate/ETH/USD");
-            httpGet.setHeader("X-CoinAPI-Key", API_KEY);
+            httpGet.setHeader(X_COINAPI_KEY, API_KEY);
             HttpResponse response = httpClient.execute(httpGet);
 
             JsonNode jsonNode = objectMapper.readTree(response.getEntity().getContent());
@@ -35,7 +37,7 @@ public class CryptoPriceClientService {
         try {
             HttpClient httpClient = HttpClients.createDefault();
             HttpGet httpGet = new HttpGet(COINAPI_API_BASE_URL + "/exchangerate/ETH/PLN");
-            httpGet.setHeader("X-CoinAPI-Key", API_KEY);
+            httpGet.setHeader(X_COINAPI_KEY, API_KEY);
             HttpResponse response = httpClient.execute(httpGet);
 
             JsonNode jsonNode = objectMapper.readTree(response.getEntity().getContent());
