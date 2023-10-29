@@ -30,7 +30,7 @@ class TaxBeneficiaryController {
     }
 
     @GetMapping("/details/{name}")
-    TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@PathVariable String name) throws IOException {
+    TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@PathVariable String name) {
         TaxBeneficiaryDetailsDto taxBeneficiaryDetails = beneficiaryDetailsService.getTaxBeneficiaryDetails(name);
         return taxBeneficiaryDetails;
 

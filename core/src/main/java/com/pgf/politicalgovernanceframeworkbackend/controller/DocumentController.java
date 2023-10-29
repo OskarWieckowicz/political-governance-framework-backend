@@ -41,7 +41,7 @@ class DocumentController {
     public ResponseEntity<DocumentDto> addDocument(
         @ModelAttribute DocumentFto documentFto,
         Principal principal
-    ) throws IOException {
+    ) {
         String key = s3Service.uploadFile(documentFto.getFile());
         if (Objects.nonNull(key)) {
 

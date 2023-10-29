@@ -3,6 +3,7 @@ package com.pgf.politicalgovernanceframeworkbackend.service;
 import com.pgf.politicalgovernanceframeworkbackend.converter.TaxBeneficiaryDetailsConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxBeneficiaryDetails;
+import com.pgf.politicalgovernanceframeworkbackend.exception.EthException;
 import com.pgf.politicalgovernanceframeworkbackend.exception.NotFoundException;
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.TaxBeneficiaryDetailsRepository;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class TaxBeneficiaryDetailsService {
     private final TaxBeneficiaryDetailsConverter converter;
     private final Web3Service web3Service;
 
-    public TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(String name) throws IOException {
+    public TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(String name) {
         TaxBeneficiaryDetails tbd = null;
         List<Object[]> results = repository.findByNameAndCalculateAverageRating(name);
         for (Object[] result : results) {
@@ -30,7 +31,11 @@ public class TaxBeneficiaryDetailsService {
         TaxBeneficiaryDetailsDto taxBeneficiaryDetailsDto =
             converter.taxBeneficiaryDetailsToTaxBeneficiaryDetailsDto(tbd);
         if(Objects.nonNull(taxBeneficiaryDetailsDto)) {
-            taxBeneficiaryDetailsDto.setBalance(web3Service.getEthBalance(taxBeneficiaryDetailsDto.getSmartContractAddress()));
+            try {
+                taxBeneficiaryDetailsDto.setBalance(web3Service.getEthBalance(taxBeneficiaryDetailsDto.getSmartContractAddress()));
+            } catch (IOException e) {
+                throw new EthException("Could not get ETH balance of the tax beneficiary's smart contract");
+            }
         }
         return taxBeneficiaryDetailsDto;
     }

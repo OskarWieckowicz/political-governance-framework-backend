@@ -1,11 +1,13 @@
 package com.pgf.politicalgovernanceframeworkbackend.service;
 
+import com.pgf.politicalgovernanceframeworkbackend.exception.FileUploadException;
 import java.io.IOException;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.ResponseInputStream;
@@ -25,17 +27,20 @@ public class S3Service {
     private String bucketName;
     private final S3Client s3Client;
 
-    public String uploadFile(MultipartFile file) throws IOException {
-        log.info("uploading file...");
+    public String uploadFile(MultipartFile file) {
+        log.info("Uploading file...");
         String s3Key = UUID.randomUUID() + "-" + file.getOriginalFilename();
         PutObjectRequest objectRequest = PutObjectRequest.builder()
             .bucket(bucketName)
             .key(s3Key)
             .contentType(detectContentType(file))
             .build();
-
-        PutObjectResponse putObjectResponse = s3Client.putObject(objectRequest, RequestBody.fromBytes(file.getBytes()));
-        return putObjectResponse.sdkHttpResponse().isSuccessful() ? s3Key : null;
+        try {
+            PutObjectResponse putObjectResponse = s3Client.putObject(objectRequest, RequestBody.fromBytes(file.getBytes()));
+            return putObjectResponse.sdkHttpResponse().isSuccessful() ? s3Key : null;
+        } catch(IOException exception) {
+            throw new FileUploadException("Error when reading file's bytes");
+        }
     }
 
     public ResponseInputStream<GetObjectResponse> downloadFile(String key) {
