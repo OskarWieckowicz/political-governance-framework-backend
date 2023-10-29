@@ -3,6 +3,7 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 import com.pgf.politicalgovernanceframeworkbackend.dto.DeclarationDto;
 import com.pgf.politicalgovernanceframeworkbackend.fto.DeclarationRequest;
 import com.pgf.politicalgovernanceframeworkbackend.service.DeclarationService;
+import jakarta.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ class DeclarationController {
     }
 
     @PutMapping
-    DeclarationDto addDeclaration(@RequestBody DeclarationRequest declarationRequestBody, Principal principal) {
+    DeclarationDto addDeclaration(@Valid @RequestBody DeclarationRequest declarationRequestBody, Principal principal) {
         return declarationService.createOrUpdateDeclaration(declarationRequestBody, principal.getName());
     }
 

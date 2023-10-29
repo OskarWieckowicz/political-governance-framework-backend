@@ -5,6 +5,7 @@ import com.pgf.politicalgovernanceframeworkbackend.dto.DocumentDto;
 import com.pgf.politicalgovernanceframeworkbackend.fto.DocumentFto;
 import com.pgf.politicalgovernanceframeworkbackend.service.DocumentService;
 import com.pgf.politicalgovernanceframeworkbackend.service.S3Service;
+import jakarta.validation.constraints.NotNull;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
@@ -56,7 +57,7 @@ class DocumentController {
     }
 
     @GetMapping("/download")
-    ResponseEntity<InputStreamResource> downloadFile(@RequestParam String key, Principal principal) {
+    ResponseEntity<InputStreamResource> downloadFile(@NotNull(message = "Key can't be null") @RequestParam String key, Principal principal) {
         if (service.hasDocument(key, principal.getName())) {
             ResponseInputStream<GetObjectResponse> responseInputStream = s3Service.downloadFile(key);
             GetObjectResponse objectResponse = responseInputStream.response();

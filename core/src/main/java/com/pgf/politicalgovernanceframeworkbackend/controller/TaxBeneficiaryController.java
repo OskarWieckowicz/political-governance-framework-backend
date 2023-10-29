@@ -4,6 +4,7 @@ import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryIndividualDto;
 import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryDetailsService;
 import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryIndividualService;
+import jakarta.validation.constraints.NotNull;
 import java.io.IOException;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +31,8 @@ class TaxBeneficiaryController {
     }
 
     @GetMapping("/details/{name}")
-    TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@PathVariable String name) {
+    TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@NotNull( message = "Name cannot be null") @PathVariable String name) {
         TaxBeneficiaryDetailsDto taxBeneficiaryDetails = beneficiaryDetailsService.getTaxBeneficiaryDetails(name);
         return taxBeneficiaryDetails;
-
     }
 }

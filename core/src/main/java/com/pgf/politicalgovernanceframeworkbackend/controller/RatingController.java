@@ -5,6 +5,7 @@ import static com.pgf.politicalgovernanceframeworkbackend.utils.DateUtils.getCur
 import com.pgf.politicalgovernanceframeworkbackend.dto.RatingDto;
 import com.pgf.politicalgovernanceframeworkbackend.fto.RatingFto;
 import com.pgf.politicalgovernanceframeworkbackend.service.RatingService;
+import jakarta.validation.Valid;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ class RatingController {
     private final RatingService service;
 
     @PutMapping()
-    ResponseEntity<Void> createOrUpdateRating(Principal principal, @RequestBody RatingFto ratingFto) {
+    ResponseEntity<Void> createOrUpdateRating(Principal principal, @Valid @RequestBody RatingFto ratingFto) {
         RatingDto ratingDto = RatingDto.builder()
             .userId(principal.getName())
             .billingPeriod(getCurrentBillingPeriod())
