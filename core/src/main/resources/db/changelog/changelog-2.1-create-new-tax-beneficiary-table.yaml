@@ -33,3 +33,6 @@ databaseChangeLog:
               - column:
                   name: smart_contract_address
                   type: VARCHAR(255)
+              - column:
+                  name: default_tax_percentage
+                  type: INT

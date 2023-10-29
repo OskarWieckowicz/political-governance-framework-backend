@@ -10,7 +10,9 @@ import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.TaxesDistributionD
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.TaxesDistributionDeclarationRepository;
 import com.pgf.politicalgovernanceframeworkbackend.utils.EthereumUtils;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,19 +26,19 @@ public class TaxesDistributionDeclarationService {
     private final TaxDistributionConverter taxDistributionConverter;
     private final CryptoPriceService cryptoPriceService;
     private final DeclarationService declarationService;
+    private final TaxBeneficiaryIndividualService taxBeneficiaryIndividualService;
 
     public TaxesDistributionDeclarationDto findByUserId(String userId) {
-        // TODO: fetch default values from external config
-        TaxesDistributionDeclaration defaultTaxesDistributionDeclaration = TaxesDistributionDeclaration.builder()
-            .distributions(
-                List.of(
-                    TaxDistribution.builder().destination("Education").percentage(40).build(),
-                    TaxDistribution.builder().destination("Health Care").percentage(20).build(),
-                    TaxDistribution.builder().destination("Army").percentage(10).build(),
-                    TaxDistribution.builder().destination("Infrastructure").percentage(20).build(),
-                    TaxDistribution.builder().destination("European Union").percentage(10).build()
+        Map<String, Integer> defaultTaxesPercentages = taxBeneficiaryIndividualService.getDefaultTaxesPercentages();
+        List<TaxDistribution> defaultDistributions = new ArrayList<>();
+        defaultTaxesPercentages
+            .forEach(
+                (key, value) -> defaultDistributions.add(
+                    TaxDistribution.builder().destination(key).percentage(value).build()
                 )
-            ).submitted(false).build();
+            );
+        TaxesDistributionDeclaration defaultTaxesDistributionDeclaration = TaxesDistributionDeclaration.builder()
+            .distributions(defaultDistributions).submitted(false).build();
         Optional<TaxesDistributionDeclaration> optionalTaxesDistributionDeclaration =
             repository.findFirstByUserId(userId);
         TaxesDistributionDeclaration taxesDistributionDeclaration =
