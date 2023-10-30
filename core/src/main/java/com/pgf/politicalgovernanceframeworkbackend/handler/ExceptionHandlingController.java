@@ -33,6 +33,7 @@ public class ExceptionHandlingController {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorFto globalExceptionHandler(Exception ex) {
         log.error(ex.getMessage());
+        ex.printStackTrace();
         return ErrorFto.builder()
             .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
             .message(ex.getMessage())

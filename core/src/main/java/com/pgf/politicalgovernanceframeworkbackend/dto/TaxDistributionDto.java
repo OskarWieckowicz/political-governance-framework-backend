@@ -14,7 +14,7 @@ public class TaxDistributionDto {
     private String destination;
 
     @NotNull
-    private Integer percentage;
+    private int percentage;
 
     @NotNull
     private BigInteger toBePaid;
