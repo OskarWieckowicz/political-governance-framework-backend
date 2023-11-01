@@ -2,6 +2,7 @@ package com.pgf.politicalgovernanceframeworkbackend.service.impl;
 
 import com.pgf.politicalgovernanceframeworkbackend.converter.UserConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.UserDto;
+import com.pgf.politicalgovernanceframeworkbackend.exception.NotFoundException;
 import com.pgf.politicalgovernanceframeworkbackend.repository.keycloak.UserRepository;
 import com.pgf.politicalgovernanceframeworkbackend.service.UserService;
 import jakarta.transaction.Transactional;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
     private final UserConverter converter;
 
     public UserDto findById(String id) {
-        return repository.findById(id).stream().map(converter::userEntityToUserDto).findFirst().orElse(null);
+        return repository.findById(id).stream()
+            .map(converter::userEntityToUserDto)
+            .findFirst()
+            .orElseThrow(() -> new NotFoundException("User not found"));
     }
 }
