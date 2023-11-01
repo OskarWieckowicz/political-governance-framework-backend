@@ -10,9 +10,11 @@ import lombok.Data;
 
 import java.math.BigInteger;
 import java.util.UUID;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class PaymentReceivedEvent {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

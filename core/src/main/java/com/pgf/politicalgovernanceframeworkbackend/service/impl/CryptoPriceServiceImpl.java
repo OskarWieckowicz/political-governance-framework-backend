@@ -7,6 +7,7 @@ import com.pgf.politicalgovernanceframeworkbackend.dto.CryptoPriceDto;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.CryptoPrice;
 import com.pgf.politicalgovernanceframeworkbackend.exception.NotFoundException;
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.CryptoPriceRepository;
+import com.pgf.politicalgovernanceframeworkbackend.service.CryptoPriceClientService;
 import com.pgf.politicalgovernanceframeworkbackend.service.CryptoPriceService;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class CryptoPriceServiceImpl implements CryptoPriceService {
     private final CryptoPriceRepository repository;
     private final CryptoPriceConverter converter;
-    private final CryptoPriceClientServiceImpl cryptoPriceClientService;
+    private final CryptoPriceClientService cryptoPriceClientService;
 
     public CryptoPriceDto getEthPrice() {
         CryptoPrice cryptoPrice =
@@ -32,8 +33,8 @@ public class CryptoPriceServiceImpl implements CryptoPriceService {
         Double ethPlnPrice = cryptoPriceClientService.getEthPlnPrice();
         if(Objects.nonNull(ethPlnPrice)) {
             cryptoPrice.setPrice(ethPlnPrice);
+            cryptoPrice.setTimestamp(LocalDateTime.now());
+            repository.save(cryptoPrice);
         }
-        cryptoPrice.setTimestamp(LocalDateTime.now());
-        repository.save(cryptoPrice);
     }
 }
