@@ -2,7 +2,7 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.DeclarationDto;
 import com.pgf.politicalgovernanceframeworkbackend.fto.DeclarationRequest;
-import com.pgf.politicalgovernanceframeworkbackend.service.DeclarationService;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.DeclarationServiceImpl;
 import jakarta.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 class DeclarationController {
 
-    private final DeclarationService declarationService;
+    private final DeclarationServiceImpl declarationService;
 
     @GetMapping("/history")
     List<DeclarationDto> getDeclarationHistory(Principal principal) {

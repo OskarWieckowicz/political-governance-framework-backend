@@ -3,10 +3,9 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 import com.pgf.politicalgovernanceframeworkbackend.converter.DocumentFtoToDtoConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.DocumentDto;
 import com.pgf.politicalgovernanceframeworkbackend.fto.DocumentFto;
-import com.pgf.politicalgovernanceframeworkbackend.service.DocumentService;
-import com.pgf.politicalgovernanceframeworkbackend.service.S3Service;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.DocumentServiceImpl;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.S3ServiceImpl;
 import jakarta.validation.constraints.NotNull;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
@@ -29,8 +28,8 @@ import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 @AllArgsConstructor
 class DocumentController {
 
-    private final DocumentService service;
-    private final S3Service s3Service;
+    private final DocumentServiceImpl service;
+    private final S3ServiceImpl s3Service;
     private final DocumentFtoToDtoConverter documentFtoToDtoConverter;
 
     @GetMapping

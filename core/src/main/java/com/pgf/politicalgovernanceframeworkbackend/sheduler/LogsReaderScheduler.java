@@ -4,15 +4,14 @@ import com.pgf.politicalgovernanceframeworkbackend.contract.TaxOffice;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
 import com.pgf.politicalgovernanceframeworkbackend.entity.pgf.PaymentReceivedEvent;
 import com.pgf.politicalgovernanceframeworkbackend.repository.pgf.PaymentReceivedEventRepository;
-import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryDetailsService;
-import com.pgf.politicalgovernanceframeworkbackend.service.Web3Service;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.TaxBeneficiaryDetailsServiceImpl;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.Web3ServiceImpl;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;
@@ -26,9 +25,9 @@ import java.util.Optional;
 @Slf4j
 public class LogsReaderScheduler {
 
-    private final Web3Service web3Service;
+    private final Web3ServiceImpl web3Service;
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
-    private final TaxBeneficiaryDetailsService taxBeneficiaryDetailsService;
+    private final TaxBeneficiaryDetailsServiceImpl taxBeneficiaryDetailsService;
 
 //    @Scheduled(fixedRate = 40000)
     public void task() {

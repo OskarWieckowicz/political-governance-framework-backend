@@ -2,10 +2,9 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryIndividualDto;
-import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryDetailsService;
-import com.pgf.politicalgovernanceframeworkbackend.service.TaxBeneficiaryIndividualService;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.TaxBeneficiaryDetailsServiceImpl;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.TaxBeneficiaryIndividualServiceImpl;
 import jakarta.validation.constraints.NotNull;
-import java.io.IOException;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,8 @@ import java.util.List;
 @RequestMapping("/taxBeneficiaries")
 class TaxBeneficiaryController {
 
-    private final TaxBeneficiaryIndividualService beneficiaryService;
-    private final TaxBeneficiaryDetailsService beneficiaryDetailsService;
+    private final TaxBeneficiaryIndividualServiceImpl beneficiaryService;
+    private final TaxBeneficiaryDetailsServiceImpl beneficiaryDetailsService;
 
     @GetMapping
     List<TaxBeneficiaryIndividualDto> getTaxBeneficiaries(Principal principal) {

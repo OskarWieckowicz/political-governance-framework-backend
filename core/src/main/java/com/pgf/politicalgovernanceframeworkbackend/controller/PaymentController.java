@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.pgf.politicalgovernanceframeworkbackend.service.PaymentService;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.PaymentServiceImpl;
 
 @RestController
 @RequestMapping("/payments")
 @RequiredArgsConstructor
 class PaymentController {
-    private final PaymentService paymentService;
+    private final PaymentServiceImpl paymentService;
 
     @GetMapping
     List<PaymentDto> getPayments(Principal principal) {

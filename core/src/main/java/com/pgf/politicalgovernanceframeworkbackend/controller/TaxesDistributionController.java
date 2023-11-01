@@ -2,7 +2,7 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxDistributionDto;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxesDistributionDeclarationDto;
-import com.pgf.politicalgovernanceframeworkbackend.service.TaxesDistributionDeclarationService;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.TaxesDistributionDeclarationServiceImpl;
 import jakarta.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/taxesDistribution")
 public class TaxesDistributionController {
-    private final TaxesDistributionDeclarationService service;
+    private final TaxesDistributionDeclarationServiceImpl service;
 
     @GetMapping
     TaxesDistributionDeclarationDto getTaxesDistributionDeclaration(Principal principal) {

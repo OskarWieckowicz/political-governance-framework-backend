@@ -2,7 +2,7 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 
 import com.pgf.politicalgovernanceframeworkbackend.converter.UserToProfileConverter;
 import com.pgf.politicalgovernanceframeworkbackend.fto.ProfileFto;
-import com.pgf.politicalgovernanceframeworkbackend.service.UserService;
+import com.pgf.politicalgovernanceframeworkbackend.service.impl.UserServiceImpl;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
     private final UserToProfileConverter converter;
 
     @GetMapping
