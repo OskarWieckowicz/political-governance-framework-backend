@@ -1,1 +1,2 @@
 com.pgf.factory.TaxIdGeneratorFactory
+com.pgf.factory.CustomAttributesValidatorFactory

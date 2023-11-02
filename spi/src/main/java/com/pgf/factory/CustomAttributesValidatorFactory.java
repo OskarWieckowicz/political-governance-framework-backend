@@ -1,6 +1,6 @@
 package com.pgf.factory;
 
-import com.pgf.provider.TaxIdGenerator;
+import com.pgf.provider.CustomAttributesValidator;
 import java.util.List;
 import org.keycloak.Config;
 import org.keycloak.authentication.FormAction;
@@ -10,13 +10,12 @@ import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
 
-public class TaxIdGeneratorFactory implements FormActionFactory {
+public class CustomAttributesValidatorFactory implements FormActionFactory {
 
-    private static final TaxIdGenerator SINGLETON = new TaxIdGenerator();
-
+    private static final CustomAttributesValidator SINGLETON = new CustomAttributesValidator();
     @Override
     public String getDisplayType() {
-        return "Tax id generator";
+        return "Custom attributes validator";
     }
 
     @Override
@@ -74,6 +73,6 @@ public class TaxIdGeneratorFactory implements FormActionFactory {
 
     @Override
     public String getId() {
-        return "Tax generator";
+        return "Custom attributes validator";
     }
 }
