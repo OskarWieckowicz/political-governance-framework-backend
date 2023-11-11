@@ -1,0 +1,18 @@
+# Use the official Keycloak image as a base
+FROM quay.io/keycloak/keycloak:22.0.1
+
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
+
+COPY ./core/src/main/resources/keycloak /opt/keycloak/data/import
+COPY ./themes /opt/keycloak/themes
+COPY ./spi/target/custom-spi.jar /opt/keycloak/providers/custom-spi.jar
+
+ENV KC_DB=postgres
+#ENV KC_DB_URL_HOST=postgres-keycloak
+#ENV KC_DB_URL_DATABASE=keycloak
+#ENV KC_DB_USERNAME=keycloak
+ENV KC_DB_SCHEMA=public
+#ENV KC_DB_PASSWORD=password
+#ENV KEYCLOAK_ADMIN=admin
+#ENV KEYCLOAK_ADMIN_PASSWORD=admin

@@ -1,0 +1,8 @@
+FROM maven:3.8.5-openjdk-17 as builder
+COPY . .
+RUN mvn package -pl core -am -DskipTests
+
+FROM openjdk:17-jdk-slim
+COPY --from=builder core/target/core-0.0.1-SNAPSHOT.jar /target/
+EXPOSE 8081
+CMD java -jar /target/core-0.0.1-SNAPSHOT.jar

@@ -1,0 +1,42 @@
+server:
+  port: 8081
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/political-governance
+          jwk-set-uri: http://localhost:8082/realms/political-governance/protocol/openid-connect/certs
+  datasource:
+    jdbcUrl:
+    username:
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none # You can change this to create if you want to initialize the schema
+    show-sql: true # Set this to true to see SQL queries in the console
+  second-datasource:
+    jdbcUrl:
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
+
+infura-endpoint:
+private-key:
+coinapi-key:
+
+aws:
+  access-key:
+  secret-key:
+  s3:
+    bucket-name:
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
