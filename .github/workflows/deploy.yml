@@ -1,0 +1,38 @@
+name: Deploy to ECS Fargate
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Spring Boot app Docker image
+      run: |
+        docker build -t pgf -f Dockerfile-springboot .
+        docker tag pgf:latest your-ecr-repository-url/your-springboot-app:latest
+
+    - name: Build Keycloak Docker image
+      run: |
+        docker build -t your-keycloak -f Dockerfile-keycloak .
+        docker tag your-keycloak:latest your-ecr-repository-url/your-keycloak:latest
+
+    - name: Authenticate with ECR
+      run: aws ecr get-login-password --region your-aws-region | docker login --username AWS --password-stdin your-ecr-repository-url
+
+    - name: Push images to ECR
+      run: |
+        docker push your-ecr-repository-url/your-springboot-app:latest
+        docker push your-ecr-repository-url/your-keycloak:latest
+
+    - name: Deploy to ECS Fargate
+      run: |
+        # Add your ECS Fargate deployment script here
+        # Use AWS CLI or ECS CLI to deploy your containers
+
