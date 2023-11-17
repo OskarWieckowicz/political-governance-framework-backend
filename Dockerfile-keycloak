@@ -21,4 +21,4 @@ ENV KC_DB_SCHEMA=public
 #ENV KEYCLOAK_ADMIN_PASSWORD=admin
 WORKDIR /opt/keycloak
 EXPOSE 8080
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start --import-realm"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start-dev --import-realm"]
