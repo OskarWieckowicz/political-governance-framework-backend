@@ -7,6 +7,7 @@ FROM quay.io/keycloak/keycloak:22.0.1
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV PROXY_ADDRESS_FORWARDING=true
+ENV KC_PROXY=edge
 
 COPY ./core/src/main/resources/keycloak /opt/keycloak/data/import
 COPY ./themes /opt/keycloak/themes
