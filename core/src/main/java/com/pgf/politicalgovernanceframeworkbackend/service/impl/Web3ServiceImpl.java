@@ -23,7 +23,7 @@ public class Web3ServiceImpl implements Web3Service {
     @Value("${infura-endpoint}")
     private String INFURA_ENDPOINT;
 
-    @Value("${private-key}")
+    @Value("${eth-private-key}")
     private String PRIVATE_KEY;
 
     private Web3j web3j;
