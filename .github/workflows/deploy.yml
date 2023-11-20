@@ -15,7 +15,7 @@ env:
   ECS_KEYCLOAK_TASK_DEFINITION: keycloak-task-definition.json
   ECS_SPRING_TASK_DEFINITION: spring-task-definition.json
   KEYCLOAK_CONTAINER_NAME: keycloak-container
-  SPRING_CONTAINER_NAME: pgf-spring
+  SPRING_CONTAINER_NAME: pgf-spring-container
 
 permissions:
   contents: read
