@@ -10,7 +10,7 @@ spring:
   datasource:
     jdbcUrl:
     username:
-    password:
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
