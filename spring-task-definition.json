@@ -25,11 +25,11 @@
       "volumesFrom": [],
       "secrets": [
         {
-          "name": " COINAPI_KEY",
+          "name": "COINAPI_KEY",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/COINAPI_KEY"
         },
         {
-          "name": " SPRING_DATASOURCE_PASSWORD",
+          "name": "SPRING_DATASOURCE_PASSWORD",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/SPRING_DATASOURCE_PASSWORD"
         },
         {
