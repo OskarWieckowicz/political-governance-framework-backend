@@ -8,9 +8,9 @@ spring:
           issuer-uri: http://localhost:8082/realms/political-governance
           jwk-set-uri: http://localhost:8082/realms/political-governance/protocol/openid-connect/certs
   datasource:
-    jdbcUrl:
-    username:
-    password: 2*}Gy}hi98(=
+    jdbcUrl: jdbc:postgresql://springboot.cynwbnwqgszz.eu-north-1.rds.amazonaws.com:5432/springboot
+    username: oskar
+    password: 98qq8fH5Xr5dnteoJ2
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
