@@ -37,7 +37,8 @@ public class PersistenceKeycloakConfiguration {
                 "spring.jpa.hibernate.ddl-auto",
                 Objects.requireNonNull(env.getProperty("spring.jpa.hibernate.ddl-auto")),
                 "hibernate.physical_naming_strategy", "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy",
-                "hibernate.implicit_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
+                "hibernate.implicit_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy",
+                "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"
             )
         );
         return em;

@@ -29,24 +29,12 @@
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/COINAPI_KEY"
         },
         {
-          "name": " SPRING_DATASOURCE_PASSWORD",
-          "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/SPRING_DATASOURCE_PASSWORD"
-        },
-        {
           "name": "ETH_PRIVATE_KEY",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/ETH_PRIVATE_KEY"
         },
         {
           "name": "INFURA_ENDPOINT",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/INFURA_ENDPOINT"
-        },
-        {
-          "name": "SPRING_DATASOURCE_JDBC_URL",
-          "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/SPRING_DATASOURCE_JDBC_URL"
-        },
-        {
-          "name": "SPRING_DATASOURCE_USERNAME",
-          "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/SPRING_DATASOURCE_USERNAME"
         },
         {
           "name": "SPRING_SECOND_DATASOURCE_JDBC_URL",
