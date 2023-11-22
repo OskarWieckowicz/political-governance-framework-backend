@@ -1,10 +1,12 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/pgf-spring-task:9",
+  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/spring-task:2",
   "containerDefinitions": [
     {
       "name": "pgf-spring-container",
-      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/pgf-spring:7406b97d1acdece7a4368f0708e9c1e7bb4747c8",
-      "cpu": 0,
+      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/pgf-spring:f6eba7a0db43261142387b3c474ea6d0f3f0f39c",
+      "cpu": 256,
+      "memory": 512,
+      "memoryReservation": 512,
       "portMappings": [
         {
           "name": "pgf-spring-container-8081-tcp",
@@ -15,22 +17,14 @@
         }
       ],
       "essential": true,
-      "environment": [
-        {
-          "name": "SPRING_PROFILES_ACTIVE",
-          "value": "dev"
-        }
-      ],
+      "environment": [],
+      "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": [],
       "secrets": [
         {
           "name": "COINAPI_KEY",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/COINAPI_KEY"
-        },
-        {
-          "name": "SPRING_DATASOURCE_PASSWORD",
-          "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/SPRING_DATASOURCE_PASSWORD"
         },
         {
           "name": "ETH_PRIVATE_KEY",
@@ -43,6 +37,10 @@
         {
           "name": "SPRING_DATASOURCE_JDBC_URL",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/SPRING_DATASOURCE_JDBC_URL"
+        },
+        {
+          "name": "SPRING_DATASOURCE_PASSWORD",
+          "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/SPRING_DATASOURCE_PASSWORD"
         },
         {
           "name": "SPRING_DATASOURCE_USERNAME",
@@ -61,11 +59,12 @@
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/SPRING_SECOND_DATASOURCE_USERNAME"
         }
       ],
+      "ulimits": [],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
           "awslogs-create-group": "true",
-          "awslogs-group": "/ecs/pgf-spring-task",
+          "awslogs-group": "/ecs/spring-task",
           "awslogs-region": "eu-north-1",
           "awslogs-stream-prefix": "ecs"
         },
@@ -73,11 +72,11 @@
       }
     }
   ],
-  "family": "pgf-spring-task",
+  "family": "spring-task",
   "taskRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 8,
+  "revision": 2,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -92,6 +91,9 @@
     },
     {
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
     },
     {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
@@ -118,15 +120,15 @@
     "FARGATE"
   ],
   "requiresCompatibilities": [
-    "FARGATE"
+    "EC2"
   ],
-  "cpu": "1024",
-  "memory": "3072",
+  "cpu": "256",
+  "memory": "512",
   "runtimePlatform": {
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-11-20T14:05:00.603Z",
+  "registeredAt": "2023-11-22T14:16:53.714Z",
   "registeredBy": "arn:aws:iam::319817641632:root",
   "tags": []
 }

@@ -1,10 +1,12 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/keycloak-task:2",
+  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/pgf-keycloak-task:2",
   "containerDefinitions": [
     {
       "name": "keycloak-container",
-      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/keycloak",
-      "cpu": 0,
+      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/keycloak:453bf8a2ccec44cd6a97da564f84e5fa4a3b8059",
+      "cpu": 256,
+      "memory": 512,
+      "memoryReservation": 512,
       "portMappings": [
         {
           "name": "keycloak-container-8080-tcp",
@@ -46,7 +48,7 @@
         "logDriver": "awslogs",
         "options": {
           "awslogs-create-group": "true",
-          "awslogs-group": "/ecs/keycloak-task",
+          "awslogs-group": "/ecs/pgf-keycloak-task",
           "awslogs-region": "eu-north-1",
           "awslogs-stream-prefix": "ecs"
         },
@@ -54,8 +56,8 @@
       }
     }
   ],
-  "family": "keycloak-task",
-  "taskRoleArn": "arn:aws:iam::319817641632:role/AWSECSTaskExecutionRole",
+  "family": "pgf-keycloak-task",
+  "taskRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
   "revision": 2,
@@ -73,6 +75,9 @@
     },
     {
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
     },
     {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
@@ -99,15 +104,15 @@
     "FARGATE"
   ],
   "requiresCompatibilities": [
-    "FARGATE"
+    "EC2"
   ],
-  "cpu": "1024",
-  "memory": "3072",
+  "cpu": "256",
+  "memory": "512",
   "runtimePlatform": {
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-11-17T16:13:06.090Z",
+  "registeredAt": "2023-11-22T13:02:32.225Z",
   "registeredBy": "arn:aws:iam::319817641632:root",
   "tags": []
 }
