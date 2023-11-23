@@ -24,14 +24,11 @@ class TaxBeneficiaryController {
 
     @GetMapping
     List<TaxBeneficiaryIndividualDto> getTaxBeneficiaries(Principal principal) {
-        List<TaxBeneficiaryIndividualDto> taxBeneficiaries =
-            beneficiaryService.getTaxBeneficiaries(principal.getName());
-        return taxBeneficiaries;
+        return beneficiaryService.getTaxBeneficiaries(principal.getName());
     }
 
     @GetMapping("/details/{name}")
     TaxBeneficiaryDetailsDto getTaxBeneficiaryDetails(@NotNull( message = "Name cannot be null") @PathVariable String name) {
-        TaxBeneficiaryDetailsDto taxBeneficiaryDetails = beneficiaryDetailsService.getTaxBeneficiaryDetails(name);
-        return taxBeneficiaryDetails;
+        return beneficiaryDetailsService.getTaxBeneficiaryDetails(name);
     }
 }

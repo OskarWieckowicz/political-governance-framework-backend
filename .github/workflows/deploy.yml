@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy keycloak
     runs-on: ubuntu-latest
     environment: production
 

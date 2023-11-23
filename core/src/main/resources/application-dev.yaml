@@ -30,6 +30,7 @@ spring:
 infura-endpoint:
 eth-private-key:
 coinapi-key:
+front-url:
 
 aws:
   access-key:
