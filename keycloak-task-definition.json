@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/pgf-keycloak-task:5",
+  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/pgf-keycloak-task:8",
   "containerDefinitions": [
     {
       "name": "keycloak-container",
-      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/keycloak:d939ac756339ee76548bc20d4b9d9c06a43cdf0e",
+      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/keycloak:0ae1a1c17647151aeaa250ebe4d67ea040efc105",
       "cpu": 256,
       "memory": 512,
       "memoryReservation": 512,
@@ -17,7 +17,12 @@
         }
       ],
       "essential": true,
-      "environment": [],
+      "environment": [
+        {
+          "name": "KC_DB",
+          "value": "postgres"
+        }
+      ],
       "mountPoints": [],
       "volumesFrom": [],
       "secrets": [
@@ -34,16 +39,16 @@
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/KC_DB_USERNAME"
         },
         {
+          "name": "KC_HOSTNAME",
+          "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/KC_HOSTNAME"
+        },
+        {
           "name": "KEYCLOAK_ADMIN",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/KEYCLOAK_ADMIN"
         },
         {
           "name": "KEYCLOAK_ADMIN_PASSWORD",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/KEYCLOAK_ADMIN_PASSWORD"
-        },
-        {
-          "name": "KC_HOSTNAME",
-          "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/KC_HOSTNAME"
         }
       ],
       "logConfiguration": {
@@ -62,7 +67,7 @@
   "taskRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 5,
+  "revision": 8,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -114,7 +119,7 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-11-27T15:36:08.216Z",
+  "registeredAt": "2023-11-27T17:55:51.421Z",
   "registeredBy": "arn:aws:iam::319817641632:root",
   "tags": []
 }
