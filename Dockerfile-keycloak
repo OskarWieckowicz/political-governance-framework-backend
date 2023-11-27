@@ -2,7 +2,12 @@ FROM maven:3.8.5-openjdk-17 as builder
 COPY . .
 RUN mvn package -pl spi -am -DskipTests
 
+FROM quay.io/keycloak/keycloak:22.0.1 as builder-2
+WORKDIR /opt/keycloak
+RUN /opt/keycloak/bin/kc.sh build
+
 FROM quay.io/keycloak/keycloak:22.0.1
+COPY --from=builder-2 /opt/keycloak/ /opt/keycloak/
 
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
