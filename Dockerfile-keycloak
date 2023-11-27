@@ -8,8 +8,10 @@ ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV PROXY_ADDRESS_FORWARDING=true
 ENV KC_PROXY=edge
+ENV KC_HOSTNAME_STRICT=false
+ENV KC_HTTP_ENABLED=true
+ENV KC_HOSTNAME_STRICT_BACKCHANNEL=true
 
-COPY ./core/src/main/resources/keycloak /opt/keycloak/data/import
 COPY ./themes /opt/keycloak/themes
 COPY --from=builder ./spi/target/custom-spi.jar /opt/keycloak/providers/custom-spi.jar
 
@@ -18,4 +20,4 @@ ENV KC_DB_SCHEMA=public
 
 WORKDIR /opt/keycloak
 EXPOSE 8080
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start-dev --import-realm"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start --optimized"]

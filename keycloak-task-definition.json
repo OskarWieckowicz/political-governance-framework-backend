@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/pgf-keycloak-task:2",
+  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/pgf-keycloak-task:5",
   "containerDefinitions": [
     {
       "name": "keycloak-container",
-      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/keycloak:453bf8a2ccec44cd6a97da564f84e5fa4a3b8059",
+      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/keycloak:d939ac756339ee76548bc20d4b9d9c06a43cdf0e",
       "cpu": 256,
       "memory": 512,
       "memoryReservation": 512,
@@ -18,7 +18,6 @@
       ],
       "essential": true,
       "environment": [],
-      "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": [],
       "secrets": [
@@ -41,9 +40,12 @@
         {
           "name": "KEYCLOAK_ADMIN_PASSWORD",
           "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/KEYCLOAK_ADMIN_PASSWORD"
+        },
+        {
+          "name": "KC_HOSTNAME",
+          "valueFrom": "arn:aws:ssm:eu-north-1:319817641632:parameter/KC_HOSTNAME"
         }
       ],
-      "ulimits": [],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -60,7 +62,7 @@
   "taskRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 2,
+  "revision": 5,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -112,7 +114,7 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-11-22T13:02:32.225Z",
+  "registeredAt": "2023-11-27T15:36:08.216Z",
   "registeredBy": "arn:aws:iam::319817641632:root",
   "tags": []
 }
