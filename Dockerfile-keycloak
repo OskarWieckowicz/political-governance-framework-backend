@@ -2,12 +2,7 @@ FROM maven:3.8.5-openjdk-17 as builder
 COPY . .
 RUN mvn package -pl spi -am -DskipTests
 
-FROM quay.io/keycloak/keycloak:22.0.1 as builder-2
-WORKDIR /opt/keycloak
-RUN /opt/keycloak/bin/kc.sh build
-
 FROM quay.io/keycloak/keycloak:22.0.1
-COPY --from=builder-2 /opt/keycloak/ /opt/keycloak/
 
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
@@ -16,7 +11,6 @@ ENV KC_PROXY=edge
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_HTTP_ENABLED=true
 ENV KC_HOSTNAME_STRICT_BACKCHANNEL=true
-
 COPY ./themes /opt/keycloak/themes
 COPY --from=builder ./spi/target/custom-spi.jar /opt/keycloak/providers/custom-spi.jar
 
