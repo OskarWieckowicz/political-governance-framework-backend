@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/spring-task:8",
+  "taskDefinitionArn": "arn:aws:ecs:eu-north-1:319817641632:task-definition/spring-task:10",
   "containerDefinitions": [
     {
       "name": "pgf-spring-container",
-      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/pgf-spring:0ae1a1c17647151aeaa250ebe4d67ea040efc105",
+      "image": "319817641632.dkr.ecr.eu-north-1.amazonaws.com/pgf-spring:5206aeca8615d68590201adb0474f7f4b3c3377b",
       "cpu": 256,
       "memory": 512,
       "memoryReservation": 512,
@@ -17,7 +17,12 @@
         }
       ],
       "essential": true,
-      "environment": [],
+      "environment": [
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "dev"
+        }
+      ],
       "mountPoints": [],
       "volumesFrom": [],
       "secrets": [
@@ -86,7 +91,7 @@
   "taskRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::319817641632:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 8,
+  "revision": 10,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -138,7 +143,7 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-11-27T22:33:12.445Z",
+  "registeredAt": "2023-12-05T20:34:45.553Z",
   "registeredBy": "arn:aws:iam::319817641632:root",
   "tags": []
 }

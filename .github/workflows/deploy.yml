@@ -9,9 +9,9 @@ env:
   AWS_REGION: eu-north-1
   ECR_KEYCLOAK_REPOSITORY: keycloak
   ECR_SPRING_REPOSITORY: pgf-spring
-  ECS_KEYCLOAK_SERVICE: pgf-keycloak-service
+  ECS_KEYCLOAK_SERVICE: keycloak-service
   ECS_SPRING_SERVICE: spring-service
-  ECS_CLUSTER: political-governance-framework
+  ECS_CLUSTER: pgf
   ECS_KEYCLOAK_TASK_DEFINITION: keycloak-task-definition.json
   ECS_SPRING_TASK_DEFINITION: spring-task-definition.json
   KEYCLOAK_CONTAINER_NAME: keycloak-container

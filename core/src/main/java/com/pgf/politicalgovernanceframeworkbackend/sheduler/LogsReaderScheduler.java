@@ -12,6 +12,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;
@@ -29,7 +30,7 @@ public class LogsReaderScheduler {
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
     private final TaxBeneficiaryDetailsServiceImpl taxBeneficiaryDetailsService;
 
-//    @Scheduled(fixedRate = 40000)
+    @Scheduled(fixedRate = 40000)
     public void task() {
         log.info("LogsReaderScheduler started!");
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =
