@@ -1,5 +1,6 @@
 package com.pgf.politicalgovernanceframeworkbackend.service.impl;
 
+import static com.pgf.politicalgovernanceframeworkbackend.utils.DateUtils.getCurrentBillingPeriod;
 import static com.pgf.politicalgovernanceframeworkbackend.utils.DateUtils.getLastBillingPeriod;
 
 import com.pgf.politicalgovernanceframeworkbackend.converter.TaxBeneficiaryConverter;
@@ -21,7 +22,7 @@ public class TaxBeneficiaryIndividualServiceImpl implements TaxBeneficiaryIndivi
 
     public List<TaxBeneficiaryIndividualDto> getTaxBeneficiaries(String userId) {
         List<TaxBeneficiaryIndividual> taxBeneficiaries =
-            repository.getAllTaxBeneficiariesIndividuals(userId, getLastBillingPeriod());
+            repository.getAllTaxBeneficiariesIndividuals(userId, getCurrentBillingPeriod());
         return taxBeneficiaries.stream().map(converter::taxBeneficiaryToTaxBeneficiaryDto).toList();
     }
 
