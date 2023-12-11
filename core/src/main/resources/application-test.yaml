@@ -1,0 +1,5 @@
+aws:
+  access-key: test
+  secret-key: test
+  s3:
+    bucket-name: test

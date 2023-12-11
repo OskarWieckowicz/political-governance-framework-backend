@@ -36,9 +36,4 @@ aws:
   s3:
     bucket-name:
 
-logging:
-  level:
-    org:
-      springframework:
-        security: DEBUG
 
