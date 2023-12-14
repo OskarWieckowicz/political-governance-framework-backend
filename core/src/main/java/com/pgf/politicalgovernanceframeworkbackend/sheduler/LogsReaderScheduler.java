@@ -32,7 +32,6 @@ public class LogsReaderScheduler {
 
     @Scheduled(fixedRate = 40000)
     public void task() {
-        log.info("LogsReaderScheduler started!");
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =
             taxBeneficiaryDetailsService.getAllTaxBeneficiariesDetails();
 
@@ -46,10 +45,13 @@ public class LogsReaderScheduler {
                 .map(receivedEvent -> DefaultBlockParameter.valueOf(receivedEvent.getBlockNumber().add(BigInteger.ONE)))
                 .orElse(DefaultBlockParameterName.EARLIEST);
             String contractAddress = taxBeneficiaryDetailsDto.getSmartContractAddress();
-            Disposable subscribe =
+            Disposable disposable =
                 web3Service.getPaymentReceivedLogs(startingBlock, DefaultBlockParameterName.LATEST, contractAddress)
-                    .subscribe(getPaymentReceivedEventResponseConsumer(contractAddress));
-//        subscribe.dispose();
+                    .subscribe(getPaymentReceivedEventResponseConsumer(contractAddress),
+                        throwable -> log.error(throwable.getMessage()));
+            if (disposable.isDisposed()) {
+                disposable.dispose();
+            }
         }
     }
 

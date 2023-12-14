@@ -15,6 +15,5 @@ public class CryptoPriceScheduler {
     @Scheduled(fixedRate = 900000)
     void updateCryptoPrice() {
         cryptoPriceService.updateEthPrice();
-        log.info("Cryptocurrency price updated.");
     }
 }
