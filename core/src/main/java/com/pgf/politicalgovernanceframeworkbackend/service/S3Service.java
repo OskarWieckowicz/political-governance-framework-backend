@@ -7,4 +7,5 @@ import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 public interface S3Service {
     String uploadFile(MultipartFile file);
     ResponseInputStream<GetObjectResponse> downloadFile(String key);
+    boolean deleteFile(String key);
 }

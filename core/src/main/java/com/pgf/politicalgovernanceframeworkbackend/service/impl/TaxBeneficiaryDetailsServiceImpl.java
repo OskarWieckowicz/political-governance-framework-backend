@@ -32,7 +32,7 @@ public class TaxBeneficiaryDetailsServiceImpl implements TaxBeneficiaryDetailsSe
         if(Objects.nonNull(taxBeneficiaryDetailsDto)) {
             try {
                 taxBeneficiaryDetailsDto.setBalance(web3Service.getEthBalance(taxBeneficiaryDetailsDto.getSmartContractAddress()));
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new EthException("Could not get ETH balance of the tax beneficiary's smart contract");
             }
         }

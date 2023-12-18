@@ -3,6 +3,8 @@ package com.pgf.politicalgovernanceframeworkbackend.controller;
 import com.pgf.politicalgovernanceframeworkbackend.converter.DocumentFtoToDtoConverter;
 import com.pgf.politicalgovernanceframeworkbackend.dto.DocumentDto;
 import com.pgf.politicalgovernanceframeworkbackend.fto.DocumentFto;
+import com.pgf.politicalgovernanceframeworkbackend.service.DocumentService;
+import com.pgf.politicalgovernanceframeworkbackend.service.S3Service;
 import com.pgf.politicalgovernanceframeworkbackend.service.impl.DocumentServiceImpl;
 import com.pgf.politicalgovernanceframeworkbackend.service.impl.S3ServiceImpl;
 import jakarta.validation.constraints.NotNull;
@@ -14,8 +16,10 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,8 +32,8 @@ import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 @AllArgsConstructor
 class DocumentController {
 
-    private final DocumentServiceImpl service;
-    private final S3ServiceImpl s3Service;
+    private final DocumentService service;
+    private final S3Service s3Service;
     private final DocumentFtoToDtoConverter documentFtoToDtoConverter;
 
     @GetMapping
@@ -71,5 +75,14 @@ class DocumentController {
         } else {
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @DeleteMapping("/{key}")
+    ResponseEntity<Void> deleteFile(@NotNull(message = "Key can't be null") @PathVariable String key) {
+        Boolean result = s3Service.deleteFile(key);
+        if(result) {
+            service.deleteDocument(key);
+        }
+        return ResponseEntity.noContent().build();
     }
 }

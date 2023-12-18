@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
+import software.amazon.awssdk.services.s3.model.DeleteObjectResponse;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
@@ -36,9 +38,10 @@ public class S3ServiceImpl implements S3Service {
             .contentType(detectContentType(file))
             .build();
         try {
-            PutObjectResponse putObjectResponse = s3Client.putObject(objectRequest, RequestBody.fromBytes(file.getBytes()));
+            PutObjectResponse putObjectResponse =
+                s3Client.putObject(objectRequest, RequestBody.fromBytes(file.getBytes()));
             return putObjectResponse.sdkHttpResponse().isSuccessful() ? s3Key : null;
-        } catch(IOException exception) {
+        } catch (IOException exception) {
             throw new FileUploadException("Error when reading file's bytes");
         }
     }
@@ -50,6 +53,12 @@ public class S3ServiceImpl implements S3Service {
             .build();
 
         return s3Client.getObject(getObjectRequest);
+    }
+
+    public boolean deleteFile(String key) {
+        DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
+        DeleteObjectResponse deleteObjectResponse = s3Client.deleteObject(deleteObjectRequest);
+        return deleteObjectResponse.sdkHttpResponse().isSuccessful();
     }
 
     private String detectContentType(MultipartFile file) {
