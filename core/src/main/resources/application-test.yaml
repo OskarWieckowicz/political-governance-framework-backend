@@ -3,3 +3,18 @@ aws:
   secret-key: test
   s3:
     bucket-name: test
+
+
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:15-alpine:///testDatabase
+    username: postgres
+    password: password
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+

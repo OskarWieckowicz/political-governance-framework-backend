@@ -30,6 +30,10 @@
             <artifactId>keycloak-spring-security-adapter</artifactId>
             <version>${keycloak.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>jdbc</artifactId>
+        </dependency>
     </dependencies>
 <build>
     <plugins>
