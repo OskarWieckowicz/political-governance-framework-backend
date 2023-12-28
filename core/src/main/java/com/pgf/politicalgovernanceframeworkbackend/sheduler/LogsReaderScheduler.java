@@ -8,7 +8,9 @@ import com.pgf.politicalgovernanceframeworkbackend.service.impl.TaxBeneficiaryDe
 import com.pgf.politicalgovernanceframeworkbackend.service.impl.Web3ServiceImpl;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -17,9 +19,6 @@ import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.response.EthBlock;
-
-import java.math.BigInteger;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +29,7 @@ public class LogsReaderScheduler {
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
     private final TaxBeneficiaryDetailsServiceImpl taxBeneficiaryDetailsService;
 
-    @Scheduled(fixedRate = 40000)
+    @Scheduled(fixedRate = 60000)
     public void task() {
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =
             taxBeneficiaryDetailsService.getAllTaxBeneficiariesDetails();
@@ -47,8 +46,10 @@ public class LogsReaderScheduler {
             String contractAddress = taxBeneficiaryDetailsDto.getSmartContractAddress();
             Disposable disposable =
                 web3Service.getPaymentReceivedLogs(startingBlock, DefaultBlockParameterName.LATEST, contractAddress)
-                    .subscribe(getPaymentReceivedEventResponseConsumer(contractAddress),
-                        throwable -> log.error(throwable.getMessage()));
+                    .subscribe(
+                        getPaymentReceivedEventResponseConsumer(contractAddress),
+                        throwable -> log.error(throwable.getMessage())
+                    );
             if (disposable.isDisposed()) {
                 disposable.dispose();
             }
