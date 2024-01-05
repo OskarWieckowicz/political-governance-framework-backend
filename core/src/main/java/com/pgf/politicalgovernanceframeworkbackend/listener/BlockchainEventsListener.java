@@ -1,4 +1,4 @@
-package com.pgf.politicalgovernanceframeworkbackend.sheduler;
+package com.pgf.politicalgovernanceframeworkbackend.listener;
 
 import com.pgf.politicalgovernanceframeworkbackend.contract.TaxOffice;
 import com.pgf.politicalgovernanceframeworkbackend.dto.TaxBeneficiaryDetailsDto;
@@ -8,6 +8,7 @@ import com.pgf.politicalgovernanceframeworkbackend.service.impl.TaxBeneficiaryDe
 import com.pgf.politicalgovernanceframeworkbackend.service.impl.Web3ServiceImpl;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import jakarta.annotation.PostConstruct;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Profile;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;
@@ -25,13 +25,13 @@ import org.web3j.protocol.core.methods.response.EthBlock;
 @RequiredArgsConstructor
 @Slf4j
 @Profile("!test")
-public class LogsReaderScheduler {
+public class BlockchainEventsListener {
 
     private final Web3ServiceImpl web3Service;
     private final PaymentReceivedEventRepository paymentReceivedEventRepository;
     private final TaxBeneficiaryDetailsServiceImpl taxBeneficiaryDetailsService;
 
-    @Scheduled(fixedRate = 60000)
+    @PostConstruct
     public void task() {
         List<TaxBeneficiaryDetailsDto> allTaxBeneficiariesDetails =
             taxBeneficiaryDetailsService.getAllTaxBeneficiariesDetails();
@@ -69,7 +69,6 @@ public class LogsReaderScheduler {
             paymentReceivedEvent.setTransactionHash(event.log.getTransactionHash());
             paymentReceivedEvent.setContractAddress(contractAddress);
             String blockHash = event.log.getBlockHash();
-
             EthBlock.Block block = web3Service.getBlockByHash(blockHash);
             paymentReceivedEvent.setTimestamp(block.getTimestamp());
             Optional<PaymentReceivedEvent> existingRecord =
