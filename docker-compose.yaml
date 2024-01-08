@@ -29,7 +29,7 @@ services:
       - web
 
   keycloak:
-    image:  quay.io/keycloak/keycloak:23.0.1
+    image:  quay.io/keycloak/keycloak:23.0.2
     command: start-dev --import-realm
     container_name: keycloak
     volumes:
